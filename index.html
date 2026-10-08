@@ -850,6 +850,41 @@ select.campo{appearance:none;background:#140b18 url("data:image/svg+xml,%3Csvg x
 .carta-mision.cumplida .cm-pie small,.carta-grande.cumplida .cm-pie small{color:#e8dcc8}
 .mm-ya{margin:0;max-width:34ch;color:var(--tenue);font-size:.95rem}
 .mm-ya[hidden]{display:none}
+
+/* ---------- Mazo por fases con flechas ---------- */
+.fase-cab{align-items:center}
+.fase-der{display:flex;align-items:center;gap:10px;margin-left:auto}
+.btn-nueva{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;background:#1a0f1f;border:2px solid var(--cobre);
+  color:var(--rosado);font-family:var(--titulo);font-weight:700;font-size:1rem;cursor:pointer;white-space:nowrap}
+.btn-nueva:hover{border-color:var(--amatista);color:#f3e1ff;box-shadow:0 0 10px rgba(164,110,232,.5)}
+.btn-nueva .ic{width:.85em;height:.85em}
+.mazo{grid-template-columns:repeat(2,1fr)!important}
+@media (min-width:860px){.mazo{grid-template-columns:repeat(4,1fr)!important}}
+.mazo.entra-der{animation:entra-der .3s ease-out}
+.mazo.entra-izq{animation:entra-izq .3s ease-out}
+@keyframes entra-der{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
+@keyframes entra-izq{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:none}}
+.paginador{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:4px}
+.paginador[hidden]{display:none}
+.flecha{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:#1a0f1f;border:2px solid var(--cobre);color:var(--oro);font-size:1.1rem;cursor:pointer}
+.flecha:hover:not([disabled]){border-color:var(--amatista);color:#f3e1ff;box-shadow:0 0 12px rgba(164,110,232,.5)}
+.flecha[disabled]{opacity:.3;cursor:default}
+.pagina-n{font-family:var(--titulo);font-weight:700;font-size:1.1rem;color:var(--rosado);min-width:52px;text-align:center}
+.carta-vacia{display:grid;place-items:center;aspect-ratio:440/596;border:2px dashed rgba(201,138,102,.45);border-radius:8px;background:rgba(20,11,24,.4);
+  color:var(--tenue);font-family:var(--titulo);font-weight:700;font-size:1.05rem;cursor:pointer;text-align:center;padding:10px}
+.carta-vacia:hover{border-color:var(--amatista);color:#e3c8ff}
+.carta-vacia .ic{display:block;margin:0 auto 6px;width:1.6em;height:1.6em}
+.sugerido{font-family:var(--titulo);font-weight:600;font-size:.95rem;color:var(--tenue)}
+
+/* ---------- Cumplida: carta gris, sello verde ---------- */
+.carta-mision,.carta-grande{background:none!important}
+.carta-mision::before,.carta-grande::before{content:"";position:absolute;inset:0;background:var(--img-mision) center/100% 100% no-repeat;z-index:0}
+.carta-mision>*,.carta-grande>*{z-index:1}
+.carta-mision.cumplida,.carta-grande.cumplida,.carta-mision.cumplida:hover{filter:drop-shadow(0 8px 14px rgba(0,0,0,.65))}
+.cumplida::before,.cumplida .cm-titulo,.cumplida .cm-arte,.cumplida .cm-pie{filter:grayscale(1) brightness(.6)}
+.carta-mision.cumplida:hover::before{filter:grayscale(.85) brightness(.72)}
+.sello-cumplida{z-index:3!important;border-color:#9ff0b8!important;color:#f2fff6!important;
+  background:linear-gradient(180deg,#2fa85a,#1b7a3e)!important;box-shadow:0 0 0 .6cqw rgba(10,40,20,.7),0 0 4cqw rgba(60,220,120,.55)!important;text-shadow:0 1px 2px rgba(0,0,0,.5)}
 @media (prefers-reduced-motion:reduce){
   .giro,.relleno,.toast,.inicio,.carta-mision{transition:none}
   .carta-mini.disponible .sello,.carta-grande .cm-arte .runa-c,.pulsa{animation:none}
@@ -859,6 +894,152 @@ select.campo{appearance:none;background:#140b18 url("data:image/svg+xml,%3Csvg x
   .anuncio.visible{animation-duration:2.6s;animation-name:anunciar-quieto}
   @keyframes anunciar-quieto{0%,85%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden}}
 }
+/* ---------- Texto blanco en todos los campos ---------- */
+.campo,input.campo,textarea.campo,select.campo{color:var(--texto);caret-color:var(--rosado);-webkit-text-fill-color:var(--texto)}
+.campo::placeholder{color:#8f7a86;-webkit-text-fill-color:#8f7a86;opacity:1}
+select.campo option{background:#1a0f1f;color:var(--texto)}
+
+/* ---------- Pixel art animado ---------- */
+.px{position:relative;display:grid;place-items:end center;height:var(--h,56px)}
+.px svg{display:block;height:100%;width:auto;shape-rendering:crispEdges;filter:drop-shadow(0 3px 4px rgba(0,0,0,.55))}
+.px.te{--h:52px}.px.te .f2{position:absolute;inset:0;display:grid;place-items:end center;opacity:0}
+.anim .px.te .f1{animation:llama-a .7s steps(1) infinite}.anim .px.te .f2{animation:llama-b .7s steps(1) infinite}
+.px.abrazo{--h:64px}.px.abrazo .cora{position:absolute;top:-4px;left:50%;height:16px;transform:translateX(-50%);opacity:.9}
+.px.abrazo .cora svg{height:16px}
+.anim .px.abrazo .cora{animation:cora-late 1.2s ease-in-out infinite}
+@keyframes cora-late{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) translateY(-6px) scale(1.25)}}
+.px.pxnota{--h:40px}.anim .px.pxnota{animation:flotar 2s ease-in-out infinite}
+.px.masaje{--h:52px}.px.masaje .brillo{position:absolute;top:0;right:-6px;font-style:normal;color:#ffe08a;opacity:0}
+.anim .px.masaje svg{animation:frotar .6s ease-in-out infinite alternate}.anim .px.masaje .brillo{animation:titila-b 1.2s ease-in-out infinite}
+@keyframes frotar{from{transform:translateX(-4px) rotate(-6deg)}to{transform:translateX(4px) rotate(6deg)}}
+@keyframes titila-b{0%,100%{opacity:0}50%{opacity:1}}
+.px.caminar{--h:56px;width:64px;display:block}
+.px.caminar .hu{position:absolute;height:18px;opacity:.9}.px.caminar .hu svg{height:18px}
+.px.caminar .hu:nth-child(1){left:8px;bottom:0}.px.caminar .hu:nth-child(2){left:26px;bottom:12px}
+.px.caminar .hu:nth-child(3){left:12px;bottom:24px}.px.caminar .hu:nth-child(4){left:30px;bottom:36px}
+.anim .px.caminar .hu{opacity:0;animation:pisada 2.4s steps(1) infinite}
+.anim .px.caminar .hu:nth-child(2){animation-delay:.6s}.anim .px.caminar .hu:nth-child(3){animation-delay:1.2s}.anim .px.caminar .hu:nth-child(4){animation-delay:1.8s}
+@keyframes pisada{0%{opacity:1}75%{opacity:0}}
+.px.otra{--h:52px}.anim .px.otra{animation:rebote 1s ease-in-out infinite}
+@keyframes rebote{0%,100%{transform:translateY(0) rotate(0)}30%{transform:translateY(-8px) rotate(-8deg)}60%{transform:translateY(0) rotate(6deg)}}
+
+/* ---------- Runas caídas: rediseño ---------- */
+.caida-marco{border-color:var(--cobre);box-shadow:0 0 0 4px var(--noche),0 0 0 6px var(--cobre-osc),inset 0 0 40px rgba(0,0,0,.45)}
+.caida-marco::before{background:linear-gradient(135deg,#d9b8ff,var(--amatista) 45%,var(--amatista-osc));border-color:var(--cobre);box-shadow:0 0 12px rgba(164,110,232,.7)}
+.caida-marco h2{color:var(--marfil)}
+.escena-c{position:relative;height:170px;border-radius:8px;overflow:hidden;border:2px solid var(--cobre-osc);margin:4px 0 14px;
+  background:radial-gradient(ellipse 60% 50% at 50% 100%,var(--luz-c),transparent 70%),linear-gradient(180deg,#0e0816,#1f1228 70%,#2a1820)}
+.escena-c::after{content:"";position:absolute;left:0;right:0;bottom:0;height:36px;background:linear-gradient(180deg,#24161f,#120a10)}
+.escena-c .px{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:2}
+.gracia .escena-c{--luz-c:rgba(255,205,120,.5)}
+.gracia .px.espada{--h:110px}
+.gracia .px.espada::before{content:"";position:absolute;left:50%;bottom:-6px;width:150px;height:60px;transform:translateX(-50%);
+  background:radial-gradient(ellipse,rgba(255,215,140,.75),transparent 70%);animation:aura 3s ease-in-out infinite;z-index:-1}
+.motas{position:absolute;inset:0;z-index:3;pointer-events:none}
+.motas span{position:absolute;bottom:30px;width:3px;height:3px;border-radius:50%;background:#ffe2a8;box-shadow:0 0 6px #ffd27a;opacity:0;animation:subir-g linear infinite}
+.caida-viva .escena-c{--luz-c:rgba(210,70,58,.45)}
+.caida-viva .px.mancha{--h:46px;bottom:18px;animation:mancha 2.6s ease-in-out infinite}
+.runas-suben span{position:absolute;bottom:40px;font-family:'Noto Sans Runic',serif;font-size:1.3rem;color:#ff9a7a;text-shadow:0 0 10px #d2463a;opacity:0;animation:runa-sube 4s ease-out infinite}
+@keyframes runa-sube{0%{opacity:0;transform:translateY(0)}20%{opacity:1}100%{opacity:0;transform:translateY(-110px)}}
+.caida-xp{position:absolute;left:0;right:0;top:16px;text-align:center;z-index:3;font-family:var(--titulo);font-weight:700;font-size:2.2rem;color:#ffe0d6;text-shadow:0 0 14px #d2463a}
+.caida-xp small{display:block;font-family:var(--pixel);font-weight:400;font-size:.8rem;color:#ffcfc4;text-shadow:none}
+.gracia{display:grid;gap:10px;justify-items:center;text-align:center}
+.gracia .escena-c{width:100%}
+.gracia h3{font-size:1.6rem;color:var(--marfil)}
+.gracia p{margin:0;font-family:var(--serif);font-weight:500;font-size:1.12rem}
+.caida-quien{margin:0 0 4px;text-align:center;font-family:var(--serif);font-weight:500;font-size:1.12rem}
+.caida-quien b{font-family:var(--titulo);color:#ffcfc4}
+.caida-motivo{margin:0 0 12px;text-align:center;color:var(--tenue);font-style:italic}
+.rescate{border-style:solid;border-color:var(--cobre-osc);background:rgba(20,11,24,.6)}
+.rescate h3{color:var(--marfil)}
+.rescates-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media (min-width:600px){.rescates-grid{grid-template-columns:repeat(3,1fr)}}
+.rescates-grid button{display:grid;justify-items:center;align-content:start;gap:8px;padding:12px 8px 10px;border-radius:8px;cursor:pointer;
+  background:radial-gradient(ellipse at 50% 30%,#2c1a34,#140b18 75%);border:2px solid var(--cobre-osc);color:var(--texto);text-align:center;font-size:.85rem;line-height:1.25}
+.rescates-grid button[aria-checked="true"]{border-color:var(--amatista);box-shadow:0 0 14px rgba(164,110,232,.55);background:radial-gradient(ellipse at 50% 30%,#3a2350,#1a0f1f 75%)}
+.rescates-grid .px{--h:48px}
+.rescate-activo{display:grid;grid-template-columns:110px 1fr;gap:16px;align-items:center}
+.rescate-activo .arte{display:grid;place-items:end center;height:110px;border-radius:8px;background:radial-gradient(ellipse at 50% 80%,rgba(164,110,232,.35),transparent 70%),#140b18;border:2px solid var(--amatista-osc)}
+.rescate-activo .px{--h:80px}
+.rescate-activo .px.abrazo{--h:92px}
+.rescate-activo .px.pxnota{--h:56px}
+@media (max-width:420px){.rescate-activo{grid-template-columns:1fr;justify-items:center;text-align:center}}
+
+/* ---------- Pergamino de verdad ---------- */
+.modal-pergamino{background:radial-gradient(ellipse at 50% 55%,rgba(60,30,80,.5),rgba(8,4,10,.94) 70%)}
+.pergamino{filter:drop-shadow(0 14px 26px rgba(0,0,0,.7))}
+.rollo::before,.rollo::after,.rodillo{
+  height:30px;border-radius:15px;
+  background:linear-gradient(180deg,#8f7350 0%,#d8c39c 18%,#f3e6c8 38%,#e2cfa8 58%,#b49a72 80%,#7c6244 100%);
+  box-shadow:0 4px 8px rgba(0,0,0,.45),inset 0 -2px 3px rgba(80,55,30,.4)}
+.rodillo::before,.rodillo::after{width:18px;height:40px;margin-top:-20px;transform:none;border-radius:6px;
+  background:linear-gradient(90deg,#3a2418,#6e4433 40%,#2a1810);border:2px solid #c98a66;box-shadow:0 2px 6px rgba(0,0,0,.6)}
+.rodillo::before{left:-14px}.rodillo::after{right:-14px}
+.rodillo.arriba{margin-bottom:-10px}.rodillo.abajo{margin-top:-10px}
+.papel{
+  background:
+    radial-gradient(ellipse at 20% 15%,rgba(255,250,235,.55),transparent 40%),
+    radial-gradient(ellipse at 85% 30%,rgba(150,110,60,.12),transparent 30%),
+    radial-gradient(ellipse at 30% 70%,rgba(150,110,60,.1),transparent 28%),
+    radial-gradient(ellipse at 75% 90%,rgba(120,85,45,.14),transparent 35%),
+    linear-gradient(90deg,rgba(120,85,45,.18),transparent 6%,transparent 94%,rgba(120,85,45,.18)),
+    linear-gradient(180deg,#f2e6c9,#e8d8b4 50%,#efe1c1);
+  box-shadow:inset 0 0 30px rgba(120,85,45,.35);
+  clip-path:none;margin:0 6px}
+.papel-int{color:#2e1d28}
+.pg-ante{color:#8a5634;letter-spacing:.24em}
+.pg-titulo{color:#3b1d4a}
+.pg-orla{color:#5b2f91}
+.pg-orla span{background:linear-gradient(90deg,transparent,#8a5634)}
+.pg-orla span:last-child{background:linear-gradient(270deg,transparent,#8a5634)}
+.capitular{color:#5b2f91;text-shadow:none}
+.ley{border-top-color:rgba(138,86,52,.3)}
+.ley h3{color:#3b1d4a}
+.ley h3 span{color:#8a5634}
+.ley.jefe h3{color:#4a2066}
+.ejemplo{border-left-color:#8a5634;background:rgba(138,86,52,.1)}
+.ejemplo b{color:#4a2066}
+.ej-titulo{color:#8a5634}
+.pg-firma{color:#5a3a2a}
+.ley-caida{border:2px solid #8a5634;border-radius:6px;background:linear-gradient(180deg,rgba(91,47,145,.1),rgba(138,86,52,.08));box-shadow:inset 0 0 0 4px rgba(242,230,201,.6),inset 0 0 0 5px rgba(138,86,52,.4)}
+.ley-caida h3{color:#3b1d4a}
+.caida-lema{color:#5b2f91}
+.caida-alerta{color:#6a2a1a}
+.caida-sello{color:#f6e6ff;background:radial-gradient(circle at 35% 30%,#c08cf0,#7a3cc0 48%,#3d1660 88%)}
+.rollo-papel{background:radial-gradient(ellipse at 25% 20%,rgba(255,250,235,.55),transparent 45%),linear-gradient(180deg,#f2e6c9,#e2cfa8);box-shadow:inset 0 0 26px rgba(120,85,45,.4)}
+.rollo-titulo{color:#3b1d4a}
+.rollo-sub{color:#8a5634}
+.lacre{color:#f3d9a0;background:radial-gradient(circle at 35% 30%,#c08cf0,#7a3cc0 45%,#3d1660 85%);
+  border:2px solid rgba(40,10,60,.45);box-shadow:0 0 0 4px rgba(106,47,160,.3),0 4px 10px rgba(0,0,0,.55),inset 0 -5px 9px rgba(0,0,0,.4),inset 0 3px 4px rgba(255,220,255,.25)}
+@keyframes pulsolacre{50%{box-shadow:0 0 0 4px rgba(164,110,232,.45),0 0 24px rgba(164,110,232,.8),inset 0 -5px 9px rgba(0,0,0,.4)}}
+.btn.hierro{background:linear-gradient(180deg,#e0a27c,var(--cobre));color:#1d1016;border-color:#f3c9aa;box-shadow:0 3px 0 var(--cobre-osc)}
+
+/* ---------- Premios: carta abierta al desbloquear ---------- */
+.carta-mini .img{background:none!important;filter:none!important;container-type:inline-size}
+.cara-mini{position:absolute;inset:0;background:var(--img-carta) center/100% 100% no-repeat;filter:drop-shadow(0 8px 14px rgba(0,0,0,.6))}
+.carta-mini.bloqueada .cara-mini{filter:grayscale(.85) brightness(.45)}
+.carta-mini.disponible .cara-mini{filter:drop-shadow(0 0 14px rgba(164,110,232,.65))}
+.carta-mini.canjeada .cara-mini{filter:grayscale(1) brightness(.62)}
+.frente{position:absolute;left:19%;right:19%;top:12.5%;bottom:13.5%;display:grid;align-content:center;justify-items:center;gap:3cqw;padding:3cqw;text-align:center;
+  background:radial-gradient(ellipse at 50% 45%,rgba(43,24,52,.94),rgba(16,8,20,.98));border-radius:2px}
+.frente small{font-size:5.4cqw;color:var(--amatista)}
+.frente b{font-family:var(--titulo);font-weight:700;font-size:8.4cqw;line-height:1.05;color:var(--marfil)}
+.frente span{font-family:var(--serif);font-weight:500;font-size:5.6cqw;line-height:1.25;color:var(--texto);display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.carta-mini.disponible .sello{top:auto;bottom:4%;transform:translateX(-50%);font-size:.78rem}
+.carta-mini.canjeada .sello{top:44%;border-color:#9ff0b8;color:#f2fff6;background:linear-gradient(180deg,#2fa85a,#1b7a3e);box-shadow:0 0 14px rgba(60,220,120,.5);text-transform:uppercase;font-family:var(--titulo);font-size:1rem;letter-spacing:.06em}
+.carta-mini.canjeada .t{color:var(--tenue)}
+
+/* ---------- Altar romántico ---------- */
+.corazon-flota{position:fixed;bottom:-30px;z-index:30;pointer-events:none;animation:cora-sube linear forwards}
+.corazon-flota svg{display:block;width:100%;height:auto;shape-rendering:crispEdges;filter:drop-shadow(0 0 6px rgba(164,110,232,.8))}
+@keyframes cora-sube{0%{transform:translate(0,0) rotate(0);opacity:0}10%{opacity:.95}50%{transform:translate(var(--dx),-55vh) rotate(var(--rot))}100%{transform:translate(calc(var(--dx) * -.5),-110vh) rotate(0);opacity:0}}
+.altar-pista{margin:2px 0 0;text-align:center;color:var(--tenue);font-size:.85rem}
+
+@media (prefers-reduced-motion:reduce){
+  .anim .px,.anim .px *,.motas span,.runas-suben span,.caida-viva .px.mancha,.gracia .px.espada::before{animation:none!important}
+  .anim .px.te .f2,.anim .px.caminar .hu{opacity:1}
+}
+
 </style>
 </head>
 <body class="en-inicio">
@@ -1708,7 +1889,7 @@ select.campo{appearance:none;background:#140b18 url("data:image/svg+xml,%3Csvg x
     </svg>
     <h1 class="titulo-juego"><span>Anti Stress</span> <span>Box</span></h1>
     <div class="filo" aria-hidden="true"><i></i></div>
-    <p class="subtitulo">Fun. Love. Mistery.</p>
+    <p class="subtitulo">Fun. Love. Mystery.</p>
   </div>
   <p class="pulsa" id="pulsa">Toca la pantalla para comenzar</p>
 </div>
@@ -1754,7 +1935,7 @@ select.campo{appearance:none;background:#140b18 url("data:image/svg+xml,%3Csvg x
         <span class="rollo-titulo">Las Leyes del Refugio</span>
         <span class="rollo-sub">Reglas del juego</span>
       </span>
-      <span class="lacre" aria-hidden="true"><svg class="sello-ic" viewBox="0 0 64 64" aria-hidden="true"><g transform="rotate(42 32 32)"><path d="M28.6 5 32 -1l3.4 6v32.5h-6.8z"/><path d="M20 37h24v5.2H20z"/><path d="M29.4 42h5.2v10h-5.2z"/><circle cx="32" cy="56.2" r="4.6"/></g><g transform="rotate(-42 32 32)"><path d="M28.6 5 32 -1l3.4 6v32.5h-6.8z"/><path d="M20 37h24v5.2H20z"/><path d="M29.4 42h5.2v10h-5.2z"/><circle cx="32" cy="56.2" r="4.6"/></g></svg></span>
+      <span class="lacre" aria-hidden="true"><svg class="sello-ic" viewBox="0 0 64 64" aria-hidden="true"><path d="M40 12a21 21 0 1 0 0 40a17 17 0 1 1 0-40z"/><path d="M45 20l1.6 3.4 3.4 1.6-3.4 1.6L45 30l-1.6-3.4-3.4-1.6 3.4-1.6z"/></svg></span>
       <span class="rollo-pista">Rompan el sello para leer las reglas</span>
     </button>
 
@@ -1836,7 +2017,7 @@ select.campo{appearance:none;background:#140b18 url("data:image/svg+xml,%3Csvg x
 
     <section class="marco caida-marco" id="sec-caidas" aria-labelledby="t-caidas">
       <h2 id="t-caidas">Runas caídas</h2>
-      <p class="ayuda">Si alguno explota o rompe una regla de convivencia, la pareja cae en batalla. Nadie pierde solo: la XP la pierde el equipo.</p>
+      <p class="ayuda">Nadie pierde solo: si uno cae, cae el equipo. Y juntos se levantan.</p>
       <div id="caida-cont"></div>
     </section>
   </div>
@@ -1845,7 +2026,7 @@ select.campo{appearance:none;background:#140b18 url("data:image/svg+xml,%3Csvg x
   <div class="pagina" id="pag-altar" data-pag="altar" hidden>
     <section class="intro-pag">
       <h2>El Altar de los Secretos</h2>
-      <p class="ayuda">Inscriban mensajes para el otro: una declaración, un elogio, un gracias por un día difícil o el spoiler de una sorpresa. Llegan sellados con runas antiguas, y hay que pagar un precio para despertarlos.</p>
+      <p class="ayuda">Un rincón para dejarle un mensaje de amor al otro. Llega sellado con runas.</p>
       <div class="soy" id="soy-altar"></div>
     </section>
 
@@ -1864,24 +2045,19 @@ select.campo{appearance:none;background:#140b18 url("data:image/svg+xml,%3Csvg x
     <section class="marco" aria-labelledby="t-inscribir">
       <h2 id="t-inscribir">Inscribir una runa</h2>
       <p class="ayuda" id="inscribir-para">Para tu pareja</p>
-      <ol class="viaje">
-        <li><span>1</span>Escribes el mensaje y eliges el precio para despertarlo.</li>
-        <li><span>2</span>Lo envías por WhatsApp: viaja escondido dentro del enlace.</li>
-        <li><span>3</span>Tu pareja toca el enlace y la runa aparece sellada en su Altar, en esta misma página.</li>
-      </ol>
       <div class="altar-form">
-        <textarea class="campo" id="al-texto" rows="4" maxlength="600" placeholder="Escribe tu mensaje secreto…" aria-label="Mensaje secreto"></textarea>
+        <textarea class="campo" id="al-texto" rows="4" maxlength="600" placeholder="Escribe tu recadito de amor…" aria-label="Mensaje secreto"></textarea>
         <fieldset class="precio">
           <legend>Precio del despertar</legend>
-          <label class="radio"><input type="radio" name="al-precio" value="xp" checked> Gastar <input class="campo mini" id="al-xp" type="number" min="1" value="20" aria-label="XP a gastar"> XP del saldo</label>
-          <label class="radio"><input type="radio" name="al-precio" value="mision"> Cumplir una micro-misión de la lista</label>
+          <label class="radio"><input type="radio" name="al-precio" value="xp" checked> Gastar <input class="campo mini" id="al-xp" type="number" min="1" value="20" aria-label="XP a gastar"> XP</label>
+          <label class="radio"><input type="radio" name="al-precio" value="mision"> Una micro-misión</label>
           <select class="campo" id="al-mision" aria-label="Micro-misión"></select>
           <label class="radio"><input type="radio" name="al-precio" value="propio"> Inventar otro precio</label>
           <input class="campo" id="al-mision-libre" type="text" maxlength="120" placeholder="Ej.: Lavar los platos cantando a todo pulmón" aria-label="Precio inventado">
-          <p class="nota-precio">Los precios que inventen se guardan en la lista para usarlos otra vez.</p>
         </fieldset>
-        <label class="check"><input type="checkbox" id="al-cifrado" checked> Sellar con criptografía rúnica</label>
+        <label class="check"><input type="checkbox" id="al-cifrado" checked> Sellar con runas</label>
         <button class="btn" id="al-inscribir">Inscribir en el Altar</button>
+        <p class="altar-pista">Se envía por WhatsApp y aparece sellada en su Altar.</p>
       </div>
       <div class="enviar-runa" id="enviar-runa" hidden></div>
     </section>
@@ -1968,27 +2144,8 @@ select.campo{appearance:none;background:#140b18 url("data:image/svg+xml,%3Csvg x
       <span class="choque"></span>
     </div>
     <h2 id="t-misiones">El mazo de misiones</h2>
-    <p class="ayuda">Toquen una carta para verla y márquenla cuando la cumplan.</p>
+    <p class="ayuda">Toquen una carta para verla y márquenla cuando la cumplan. Con «Nueva carta» agregan sus propios desafíos a cada fase.</p>
     <div id="fases"></div>
-    <details class="forja" id="forja-mision">
-      <summary><svg class="ic" viewBox="0 0 576 512" aria-hidden="true" focusable="false"><path d="M413.5 237.5c-28.2 4.8-58.2-3.6-80-25.4l-38.1-38.1C280.4 159 272 138.8 272 117.6V105.5L192.3 62c-5.3-2.9-8.6-8.6-8.3-14.7s3.9-11.5 9.5-14l47.2-21C259.1 4.2 279 0 299.2 0h18.1c36.7 0 72 14 98.7 39.1l44.6 42c24.2 22.8 33.2 55.7 26.6 86L503 183l8-8c9.4-9.4 24.6-9.4 33.9 0l24 24c9.4 9.4 9.4 24.6 0 33.9l-88 88c-9.4 9.4-24.6 9.4-33.9 0l-24-24c-9.4-9.4-9.4-24.6 0-33.9l8-8-17.5-17.5zM27.4 377.1L260.9 182.6c3.5 4.9 7.5 9.6 11.8 14l38.1 38.1c6 6 12.4 11.2 19.2 15.7L134.9 484.6c-14.5 17.4-36 27.4-58.6 27.4C34.1 512 0 477.8 0 435.7c0-22.6 10.1-44.1 27.4-58.6z"/></svg> Forjar una carta nueva para el mazo</summary>
-      <div class="forja-campos">
-        <input class="campo" id="fm-nombre" type="text" maxlength="30" placeholder="Nombre de la carta" aria-label="Nombre de la carta">
-        <input class="campo" id="fm-xp" type="number" inputmode="numeric" min="1" placeholder="XP" aria-label="XP que da la carta">
-        <textarea class="campo" id="fm-desc" rows="2" maxlength="180" placeholder="¿Qué hay que hacer para cumplirla?" aria-label="Descripción de la misión"></textarea>
-        <div class="iconos" id="fm-iconos" role="radiogroup" aria-label="Ícono de la carta"></div>
-        <button class="btn" id="fm-crear">Agregar al mazo</button>
-      </div>
-    </details>
-    <div class="libre">
-      <h3>Misión libre</h3>
-      <p class="fase-desc">Para algo que pasó una sola vez. Suma XP sin crear una carta.</p>
-      <div class="personalizada">
-        <input class="campo" id="mision-nombre" type="text" maxlength="60" placeholder="Nombre de la misión" aria-label="Nombre de la misión">
-        <input class="campo" id="mision-xp" type="number" inputmode="numeric" min="1" placeholder="XP" aria-label="Cantidad de XP">
-        <button class="btn" id="btn-sumar">Sumar XP</button>
-      </div>
-    </div>
   </section>
   </div>
 
@@ -2017,6 +2174,25 @@ select.campo{appearance:none;background:#140b18 url("data:image/svg+xml,%3Csvg x
     <p>Juntos podemos aprender como amar de forma divertida.</p>
   </footer>
 </main>
+
+<!-- Modal de nueva carta -->
+<div class="modal" id="modal-forja" role="dialog" aria-modal="true" aria-labelledby="mf-titulo">
+  <div class="modal-caja marco panel-ancho">
+    <h2 id="mf-titulo">Nueva carta</h2>
+    <p class="ayuda" id="mf-fase">Fase I: Misiones diarias</p>
+    <label class="lbl" for="fm-nombre">Nombre de la misión</label>
+    <input class="campo" id="fm-nombre" type="text" maxlength="30" placeholder="Ej.: Lavar los platos juntos">
+    <label class="lbl fila-xp" for="fm-xp"><span>XP que da <small class="sugerido" id="mf-sugerido"></small></span><input class="campo mini" id="fm-xp" type="number" inputmode="numeric" min="1"></label>
+    <label class="lbl" for="fm-desc">¿Qué hay que hacer?</label>
+    <textarea class="campo" id="fm-desc" rows="2" maxlength="180" placeholder="Las reglas de la misión"></textarea>
+    <p class="lbl">Ícono</p>
+    <div class="iconos" id="fm-iconos" role="radiogroup" aria-label="Ícono de la carta"></div>
+    <div class="acciones">
+      <button class="btn" id="fm-crear">Agregar al mazo</button>
+      <button class="btn sec" id="fm-cerrar">Cancelar</button>
+    </div>
+  </div>
+</div>
 
 <!-- Modal de misión -->
 <div class="modal" id="modal-mision" role="dialog" aria-modal="true" aria-labelledby="mm-nombre">
@@ -2138,7 +2314,7 @@ select.campo{appearance:none;background:#140b18 url("data:image/svg+xml,%3Csvg x
       <div class="papel-int">
         <p class="pg-ante">Reglas del juego</p>
         <h2 class="pg-titulo" id="pg-titulo">Las Leyes del Refugio</h2>
-        <div class="pg-orla" aria-hidden="true"><span></span>⚔<span></span></div>
+        <div class="pg-orla" aria-hidden="true"><span></span>◆<span></span></div>
         <p class="pg-intro"><span class="capitular">S</span>epan, viajeros: este reino tiene una sola gran misión, que es cuidarse el uno al otro y vencer juntos al estrés de cada día. Para lograrlo, los dos juran respetar estas leyes.</p>
 
         <div class="ley">
@@ -2204,7 +2380,7 @@ select.campo{appearance:none;background:#140b18 url("data:image/svg+xml,%3Csvg x
 
         <p class="pg-cierre">Que la serenidad guíe sus pasos.</p>
         <div class="pg-firma">
-          <span class="lacre lacre-fijo" aria-hidden="true"><svg class="sello-ic" viewBox="0 0 64 64" aria-hidden="true"><g transform="rotate(42 32 32)"><path d="M28.6 5 32 -1l3.4 6v32.5h-6.8z"/><path d="M20 37h24v5.2H20z"/><path d="M29.4 42h5.2v10h-5.2z"/><circle cx="32" cy="56.2" r="4.6"/></g><g transform="rotate(-42 32 32)"><path d="M28.6 5 32 -1l3.4 6v32.5h-6.8z"/><path d="M20 37h24v5.2H20z"/><path d="M29.4 42h5.2v10h-5.2z"/><circle cx="32" cy="56.2" r="4.6"/></g></svg></span>
+          <span class="lacre lacre-fijo" aria-hidden="true"><svg class="sello-ic" viewBox="0 0 64 64" aria-hidden="true"><path d="M40 12a21 21 0 1 0 0 40a17 17 0 1 1 0-40z"/><path d="M45 20l1.6 3.4 3.4 1.6-3.4 1.6L45 30l-1.6-3.4-3.4-1.6 3.4-1.6z"/></svg></span>
           <span>Sellado en el Refugio de Almas</span>
         </div>
         <button class="btn hierro pg-btn" id="reglas-jugar">Aceptar las leyes y jugar</button>
@@ -2277,9 +2453,10 @@ const FASES = [
     ]}
 ];
 
-const ICONOS_FORJA = ["fa-heart","fa-star","fa-fire","fa-moon","fa-feather-pointed","fa-wand-sparkles",
-  "fa-crown","fa-dragon","fa-hat-wizard","fa-gem","fa-music","fa-book-open","fa-seedling","fa-bed",
-  "fa-camera","fa-film","fa-mountain-sun","fa-ghost"];
+const ICONOS_FORJA = ["fa-heart","fa-star","fa-fire","fa-moon","fa-utensils","fa-mug-hot",
+  "fa-broom","fa-couch","fa-bath","fa-bed","fa-person-walking","fa-dumbbell","fa-plane","fa-car-side",
+  "fa-gift","fa-cake-candles","fa-paw","fa-music","fa-film","fa-camera","fa-book-open","fa-seedling",
+  "fa-mountain-sun","fa-feather-pointed","fa-wand-sparkles","fa-crown","fa-dragon","fa-gem","fa-hat-wizard","fa-ghost"];
 const XP_JEFE = 200; // las cartas forjadas desde este valor se ven como jefe
 
 // ===== Estado y guardado =====
@@ -2344,7 +2521,7 @@ function cargar(){
 function guardar(){ try{ localStorage.setItem(CLAVE, JSON.stringify(estado)); }catch(e){} }
 
 const $ = id => document.getElementById(id);
-const ICONOS = {"fa-bandage":["0 0 640 512","M480 416h96c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H480V416zM448 96H192V416H448V96zM64 96C28.7 96 0 124.7 0 160V352c0 35.3 28.7 64 64 64h96V96H64zM248 208a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm120-24a24 24 0 1 1 0 48 24 24 0 1 1 0-48zM248 304a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm120-24a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"],"fa-battery-quarter":["0 0 576 512","M464 160c8.8 0 16 7.2 16 16V336c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16H464zM80 96C35.8 96 0 131.8 0 176V336c0 44.2 35.8 80 80 80H464c44.2 0 80-35.8 80-80V320c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32V176c0-44.2-35.8-80-80-80H80zm112 96H96V320h96V192z"],"fa-bed":["0 0 640 512","M32 32c17.7 0 32 14.3 32 32V320H288V160c0-17.7 14.3-32 32-32H544c53 0 96 43 96 96V448c0 17.7-14.3 32-32 32s-32-14.3-32-32V416H352 320 64v32c0 17.7-14.3 32-32 32s-32-14.3-32-32V64C0 46.3 14.3 32 32 32zm144 96a80 80 0 1 1 0 160 80 80 0 1 1 0-160z"],"fa-bolt":["0 0 448 512","M349.4 44.6c5.9-13.7 1.5-29.7-10.6-38.5s-28.6-8-39.9 1.8l-256 224c-10 8.8-13.6 22.9-8.9 35.3S50.7 288 64 288H175.5L98.6 467.4c-5.9 13.7-1.5 29.7 10.6 38.5s28.6 8 39.9-1.8l256-224c10-8.8 13.6-22.9 8.9-35.3s-16.6-20.7-30-20.7H272.5L349.4 44.6z"],"fa-book-open":["0 0 576 512","M249.6 471.5c10.8 3.8 22.4-4.1 22.4-15.5V78.6c0-4.2-1.6-8.4-5-11C247.4 52 202.4 32 144 32C93.5 32 46.3 45.3 18.1 56.1C6.8 60.5 0 71.7 0 83.8V454.1c0 11.9 12.8 20.2 24.1 16.5C55.6 460.1 105.5 448 144 448c33.9 0 79 14 105.6 23.5zm76.8 0C353 462 398.1 448 432 448c38.5 0 88.4 12.1 119.9 22.6c11.3 3.8 24.1-4.6 24.1-16.5V83.8c0-12.1-6.8-23.3-18.1-27.6C529.7 45.3 482.5 32 432 32c-58.4 0-103.4 20-123 35.6c-3.3 2.6-5 6.8-5 11V456c0 11.4 11.7 19.3 22.4 15.5z"],"fa-box-open":["0 0 640 512","M58.9 42.1c3-6.1 9.6-9.6 16.3-8.7L320 64 564.8 33.4c6.7-.8 13.3 2.7 16.3 8.7l41.7 83.4c9 17.9-.6 39.6-19.8 45.1L439.6 217.3c-13.9 4-28.8-1.9-36.2-14.3L320 64 236.6 203c-7.4 12.4-22.3 18.3-36.2 14.3L37.1 170.6c-19.3-5.5-28.8-27.2-19.8-45.1L58.9 42.1zM321.1 128l54.9 91.4c14.9 24.8 44.6 36.6 72.5 28.6L576 211.6v167c0 22-15 41.2-36.4 46.6l-204.1 51c-10.2 2.6-20.9 2.6-31 0l-204.1-51C79 419.7 64 400.5 64 378.5v-167L191.6 248c27.8 8 57.6-3.8 72.5-28.6L318.9 128h2.2z"],"fa-camera":["0 0 512 512","M149.1 64.8L138.7 96H64C28.7 96 0 124.7 0 160V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H373.3L362.9 64.8C356.4 45.2 338.1 32 317.4 32H194.6c-20.7 0-39 13.2-45.5 32.8zM256 192a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"],"fa-check":["0 0 448 512","M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"],"fa-cloud":["0 0 640 512","M0 336c0 79.5 64.5 144 144 144H512c70.7 0 128-57.3 128-128c0-61.9-44-113.6-102.4-125.4c4.1-10.7 6.4-22.4 6.4-34.6c0-53-43-96-96-96c-19.7 0-38.1 6-53.3 16.2C367 64.2 315.3 32 256 32C167.6 32 96 103.6 96 192c0 2.7 .1 5.4 .2 8.1C40.2 219.8 0 273.2 0 336z"],"fa-compass":["0 0 512 512","M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm50.7-186.9L162.4 380.6c-19.4 7.5-38.5-11.6-31-31l55.5-144.3c3.3-8.5 9.9-15.1 18.4-18.4l144.3-55.5c19.4-7.5 38.5 11.6 31 31L325.1 306.7c-3.2 8.5-9.9 15.1-18.4 18.4zM288 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"],"fa-copy":["0 0 512 512","M272 0H396.1c12.7 0 24.9 5.1 33.9 14.1l67.9 67.9c9 9 14.1 21.2 14.1 33.9V336c0 26.5-21.5 48-48 48H272c-26.5 0-48-21.5-48-48V48c0-26.5 21.5-48 48-48zM48 128H192v64H64V448H256V416h64v48c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V176c0-26.5 21.5-48 48-48z"],"fa-crown":["0 0 576 512","M309 106c11.4-7 19-19.7 19-34c0-22.1-17.9-40-40-40s-40 17.9-40 40c0 14.4 7.6 27 19 34L209.7 220.6c-9.1 18.2-32.7 23.4-48.6 10.7L72 160c5-6.7 8-15 8-24c0-22.1-17.9-40-40-40S0 113.9 0 136s17.9 40 40 40c.2 0 .5 0 .7 0L86.4 427.4c5.5 30.4 32 52.6 63 52.6H426.6c30.9 0 57.4-22.1 63-52.6L535.3 176c.2 0 .5 0 .7 0c22.1 0 40-17.9 40-40s-17.9-40-40-40s-40 17.9-40 40c0 9 3 17.3 8 24l-89.1 71.3c-15.9 12.7-39.5 7.5-48.6-10.7L309 106z"],"fa-dice-d20":["0 0 512 512","M48.7 125.8l53.2 31.9c7.8 4.7 17.8 2 22.2-5.9L201.6 12.1c3-5.4-.9-12.1-7.1-12.1c-1.6 0-3.2 .5-4.6 1.4L47.9 98.8c-9.6 6.6-9.2 20.9 .8 26.9zM16 171.7V295.3c0 8 10.4 11 14.7 4.4l60-92c5-7.6 2.6-17.8-5.2-22.5L40.2 158C29.6 151.6 16 159.3 16 171.7zM310.4 12.1l77.6 139.6c4.4 7.9 14.5 10.6 22.2 5.9l53.2-31.9c10-6 10.4-20.3 .8-26.9L322.1 1.4c-1.4-.9-3-1.4-4.6-1.4c-6.2 0-10.1 6.7-7.1 12.1zM496 171.7c0-12.4-13.6-20.1-24.2-13.7l-45.3 27.2c-7.8 4.7-10.1 14.9-5.2 22.5l60 92c4.3 6.7 14.7 3.6 14.7-4.4V171.7zm-49.3 246L286.1 436.6c-8.1 .9-14.1 7.8-14.1 15.9v52.8c0 3.7 3 6.8 6.8 6.8c.8 0 1.6-.1 2.4-.4l172.7-64c6.1-2.2 10.1-8 10.1-14.5c0-9.3-8.1-16.5-17.3-15.4zM233.2 512c3.7 0 6.8-3 6.8-6.8V452.6c0-8.1-6.1-14.9-14.1-15.9l-160.6-19c-9.2-1.1-17.3 6.1-17.3 15.4c0 6.5 4 12.3 10.1 14.5l172.7 64c.8 .3 1.6 .4 2.4 .4zM41.7 382.9l170.9 20.2c7.8 .9 13.4-7.5 9.5-14.3l-85.7-150c-5.9-10.4-20.7-10.8-27.3-.8L30.2 358.2c-6.5 9.9-.3 23.3 11.5 24.7zm439.6-24.8L402.9 238.1c-6.5-10-21.4-9.6-27.3 .8L290.2 388.5c-3.9 6.8 1.6 15.2 9.5 14.3l170.1-20c11.8-1.4 18-14.7 11.5-24.6zm-216.9 11l78.4-137.2c6.1-10.7-1.6-23.9-13.9-23.9H183.1c-12.3 0-20 13.3-13.9 23.9l78.4 137.2c3.7 6.4 13 6.4 16.7 0zM174.4 176H337.6c12.2 0 19.9-13.1 14-23.8l-80-144c-2.8-5.1-8.2-8.2-14-8.2h-3.2c-5.8 0-11.2 3.2-14 8.2l-80 144c-5.9 10.7 1.8 23.8 14 23.8z"],"fa-dove":["0 0 512 512","M160.8 96.5c14 17 31 30.9 49.5 42.2c25.9 15.8 53.7 25.9 77.7 31.6V138.8C265.8 108.5 250 71.5 248.6 28c-.4-11.3-7.5-21.5-18.4-24.4c-7.6-2-15.8-.2-21 5.8c-13.3 15.4-32.7 44.6-48.4 87.2zM320 144v30.6l0 0v1.3l0 0 0 32.1c-60.8-5.1-185-43.8-219.3-157.2C97.4 40 87.9 32 76.6 32c-7.9 0-15.3 3.9-18.8 11C46.8 65.9 32 112.1 32 176c0 116.9 80.1 180.5 118.4 202.8L11.8 416.6C6.7 418 2.6 421.8 .9 426.8s-.8 10.6 2.3 14.8C21.7 466.2 77.3 512 160 512c3.6 0 7.2-1.2 10-3.5L245.6 448H320c88.4 0 160-71.6 160-160V128l29.9-44.9c1.3-2 2.1-4.4 2.1-6.8c0-6.8-5.5-12.3-12.3-12.3H400c-44.2 0-80 35.8-80 80zm80-16a16 16 0 1 1 0 32 16 16 0 1 1 0-32z"],"fa-dragon":["0 0 640 512","M352 124.5l-51.9-13c-6.5-1.6-11.3-7.1-12-13.8s2.8-13.1 8.7-16.1l40.8-20.4L294.4 28.8c-5.5-4.1-7.8-11.3-5.6-17.9S297.1 0 304 0H416h32 16c30.2 0 58.7 14.2 76.8 38.4l57.6 76.8c6.2 8.3 9.6 18.4 9.6 28.8c0 26.5-21.5 48-48 48H538.5c-17 0-33.3-6.7-45.3-18.7L480 160H448v21.5c0 24.8 12.8 47.9 33.8 61.1l106.6 66.6c32.1 20.1 51.6 55.2 51.6 93.1C640 462.9 590.9 512 530.2 512H496 432 32.3c-3.3 0-6.6-.4-9.6-1.4C13.5 507.8 6 501 2.4 492.1C1 488.7 .2 485.2 0 481.4c-.2-3.7 .3-7.3 1.3-10.7c2.8-9.2 9.6-16.7 18.6-20.4c3-1.2 6.2-2 9.5-2.2L433.3 412c8.3-.7 14.7-7.7 14.7-16.1c0-4.3-1.7-8.4-4.7-11.4l-44.4-44.4c-30-30-46.9-70.7-46.9-113.1V181.5v-57zM512 72.3c0-.1 0-.2 0-.3s0-.2 0-.3v.6zm-1.3 7.4L464.3 68.1c-.2 1.3-.3 2.6-.3 3.9c0 13.3 10.7 24 24 24c10.6 0 19.5-6.8 22.7-16.3zM130.9 116.5c16.3-14.5 40.4-16.2 58.5-4.1l130.6 87V227c0 32.8 8.4 64.8 24 93H112c-6.7 0-12.7-4.2-15-10.4s-.5-13.3 4.6-17.7L171 232.3 18.4 255.8c-7 1.1-13.9-2.6-16.9-9s-1.5-14.1 3.8-18.8L130.9 116.5z"],"fa-drumstick-bite":["0 0 512 512","M160 265.2c0 8.5-3.4 16.6-9.4 22.6l-26.8 26.8c-12.3 12.3-32.5 11.4-49.4 7.2C69.8 320.6 65 320 60 320c-33.1 0-60 26.9-60 60s26.9 60 60 60c6.3 0 12 5.7 12 12c0 33.1 26.9 60 60 60s60-26.9 60-60c0-5-.6-9.8-1.8-14.5c-4.2-16.9-5.2-37.1 7.2-49.4l26.8-26.8c6-6 14.1-9.4 22.6-9.4H336c6.3 0 12.4-.3 18.5-1c11.9-1.2 16.4-15.5 10.8-26c-8.5-15.8-13.3-33.8-13.3-53c0-61.9 50.1-112 112-112c8 0 15.7 .8 23.2 2.4c11.7 2.5 24.1-5.9 22-17.6C494.5 62.5 422.5 0 336 0C238.8 0 160 78.8 160 176v89.2z"],"fa-eye":["0 0 576 512","M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"],"fa-feather-pointed":["0 0 512 512","M278.5 215.6L23 471c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l74.8-74.8c7.4 4.6 15.3 8.2 23.8 10.5C200.3 452.8 270 454.5 338 409.4c12.2-8.1 5.8-25.4-8.8-25.4l-16.1 0c-5.1 0-9.2-4.1-9.2-9.2c0-4.1 2.7-7.6 6.5-8.8l97.7-29.3c3.4-1 6.4-3.1 8.4-6.1c4.4-6.4 8.6-12.9 12.6-19.6c6.2-10.3-1.5-23-13.5-23l-38.6 0c-5.1 0-9.2-4.1-9.2-9.2c0-4.1 2.7-7.6 6.5-8.8l80.9-24.3c4.6-1.4 8.4-4.8 10.2-9.3C494.5 163 507.8 86.1 511.9 36.8c.8-9.9-3-19.6-10-26.6s-16.7-10.8-26.6-10C391.5 7 228.5 40.5 137.4 131.6C57.3 211.7 56.7 302.3 71.3 356.4c2.1 7.9 12 9.6 17.8 3.8L253.6 195.8c6.2-6.2 16.4-6.2 22.6 0c5.4 5.4 6.1 13.6 2.2 19.8z"],"fa-film":["0 0 512 512","M0 96C0 60.7 28.7 32 64 32H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM48 368v32c0 8.8 7.2 16 16 16H96c8.8 0 16-7.2 16-16V368c0-8.8-7.2-16-16-16H64c-8.8 0-16 7.2-16 16zm368-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V368c0-8.8-7.2-16-16-16H416zM48 240v32c0 8.8 7.2 16 16 16H96c8.8 0 16-7.2 16-16V240c0-8.8-7.2-16-16-16H64c-8.8 0-16 7.2-16 16zm368-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V240c0-8.8-7.2-16-16-16H416zM48 112v32c0 8.8 7.2 16 16 16H96c8.8 0 16-7.2 16-16V112c0-8.8-7.2-16-16-16H64c-8.8 0-16 7.2-16 16zM416 96c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V112c0-8.8-7.2-16-16-16H416zM160 128v64c0 17.7 14.3 32 32 32H320c17.7 0 32-14.3 32-32V128c0-17.7-14.3-32-32-32H192c-17.7 0-32 14.3-32 32zm32 160c-17.7 0-32 14.3-32 32v64c0 17.7 14.3 32 32 32H320c17.7 0 32-14.3 32-32V320c0-17.7-14.3-32-32-32H192z"],"fa-fire":["0 0 448 512","M159.3 5.4c7.8-7.3 19.9-7.2 27.7 .1c27.6 25.9 53.5 53.8 77.7 84c11-14.4 23.5-30.1 37-42.9c7.9-7.4 20.1-7.4 28 .1c34.6 33 63.9 76.6 84.5 118c20.3 40.8 33.8 82.5 33.8 111.9C448 404.2 348.2 512 224 512C98.4 512 0 404.1 0 276.5c0-38.4 17.8-85.3 45.4-131.7C73.3 97.7 112.7 48.6 159.3 5.4zM225.7 416c25.3 0 47.7-7 68.8-21c42.1-29.4 53.4-88.2 28.1-134.4c-4.5-9-16-9.6-22.5-2l-25.2 29.3c-6.6 7.6-18.5 7.4-24.7-.5c-16.5-21-46-58.5-62.8-79.8c-6.3-8-18.3-8.1-24.7-.1c-33.8 42.5-50.8 69.3-50.8 99.4C112 375.4 162.6 416 225.7 416z"],"fa-fire-flame-curved":["0 0 384 512","M153.6 29.9l16-21.3C173.6 3.2 180 0 186.7 0C198.4 0 208 9.6 208 21.3V43.5c0 13.1 5.4 25.7 14.9 34.7L307.6 159C356.4 205.6 384 270.2 384 337.7C384 434 306 512 209.7 512H192C86 512 0 426 0 320v-3.8c0-48.8 19.4-95.6 53.9-130.1l3.5-3.5c4.2-4.2 10-6.6 16-6.6C85.9 176 96 186.1 96 198.6V288c0 35.3 28.7 64 64 64s64-28.7 64-64v-3.9c0-18-7.2-35.3-19.9-48l-38.6-38.6c-24-24-37.5-56.7-37.5-90.7c0-27.7 9-54.8 25.6-76.9z"],"fa-flask":["0 0 448 512","M288 0H160 128C110.3 0 96 14.3 96 32s14.3 32 32 32V196.8c0 11.8-3.3 23.5-9.5 33.5L10.3 406.2C3.6 417.2 0 429.7 0 442.6C0 480.9 31.1 512 69.4 512H378.6c38.3 0 69.4-31.1 69.4-69.4c0-12.8-3.6-25.4-10.3-36.4L329.5 230.4c-6.2-10.1-9.5-21.7-9.5-33.5V64c17.7 0 32-14.3 32-32s-14.3-32-32-32H288zM192 196.8V64h64V196.8c0 23.7 6.6 46.9 19 67.1L309.5 320h-171L173 263.9c12.4-20.2 19-43.4 19-67.1z"],"fa-gear":["0 0 512 512","M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.7c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.7c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.7c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336a80 80 0 1 0 0-160 80 80 0 1 0 0 160z"],"fa-gem":["0 0 512 512","M116.7 33.8c4.5-6.1 11.7-9.8 19.3-9.8H376c7.6 0 14.8 3.6 19.3 9.8l112 152c6.8 9.2 6.1 21.9-1.5 30.4l-232 256c-4.5 5-11 7.9-17.8 7.9s-13.2-2.9-17.8-7.9l-232-256c-7.7-8.5-8.3-21.2-1.5-30.4l112-152zm38.5 39.8c-3.3 2.5-4.2 7-2.1 10.5l57.4 95.6L63.3 192c-4.1 .3-7.3 3.8-7.3 8s3.2 7.6 7.3 8l192 16c.4 0 .9 0 1.3 0l192-16c4.1-.3 7.3-3.8 7.3-8s-3.2-7.6-7.3-8L301.5 179.8l57.4-95.6c2.1-3.5 1.2-8.1-2.1-10.5s-7.9-2-10.7 1L256 172.2 165.9 74.6c-2.8-3-7.4-3.4-10.7-1z"],"fa-ghost":["0 0 384 512","M40.1 467.1l-11.2 9c-3.2 2.5-7.1 3.9-11.1 3.9C8 480 0 472 0 462.2V192C0 86 86 0 192 0S384 86 384 192V462.2c0 9.8-8 17.8-17.8 17.8c-4 0-7.9-1.4-11.1-3.9l-11.2-9c-13.4-10.7-32.8-9-44.1 3.9L269.3 506c-3.3 3.8-8.2 6-13.3 6s-9.9-2.2-13.3-6l-26.6-30.5c-12.7-14.6-35.4-14.6-48.2 0L141.3 506c-3.3 3.8-8.2 6-13.3 6s-9.9-2.2-13.3-6L84.2 471c-11.3-12.9-30.7-14.6-44.1-3.9zM160 192a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm96 32a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"],"fa-hammer":["0 0 576 512","M413.5 237.5c-28.2 4.8-58.2-3.6-80-25.4l-38.1-38.1C280.4 159 272 138.8 272 117.6V105.5L192.3 62c-5.3-2.9-8.6-8.6-8.3-14.7s3.9-11.5 9.5-14l47.2-21C259.1 4.2 279 0 299.2 0h18.1c36.7 0 72 14 98.7 39.1l44.6 42c24.2 22.8 33.2 55.7 26.6 86L503 183l8-8c9.4-9.4 24.6-9.4 33.9 0l24 24c9.4 9.4 9.4 24.6 0 33.9l-88 88c-9.4 9.4-24.6 9.4-33.9 0l-24-24c-9.4-9.4-9.4-24.6 0-33.9l8-8-17.5-17.5zM27.4 377.1L260.9 182.6c3.5 4.9 7.5 9.6 11.8 14l38.1 38.1c6 6 12.4 11.2 19.2 15.7L134.9 484.6c-14.5 17.4-36 27.4-58.6 27.4C34.1 512 0 477.8 0 435.7c0-22.6 10.1-44.1 27.4-58.6z"],"fa-hand-fist":["0 0 448 512","M192 0c17.7 0 32 14.3 32 32V144H160V32c0-17.7 14.3-32 32-32zM64 64c0-17.7 14.3-32 32-32s32 14.3 32 32v80H64V64zm192 0c0-17.7 14.3-32 32-32s32 14.3 32 32v96c0 17.7-14.3 32-32 32s-32-14.3-32-32V64zm96 64c0-17.7 14.3-32 32-32s32 14.3 32 32v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V128zm-96 88l0-.6c9.4 5.4 20.3 8.6 32 8.6c13.2 0 25.4-4 35.6-10.8c8.7 24.9 32.5 42.8 60.4 42.8c11.7 0 22.6-3.1 32-8.6V256c0 52.3-25.1 98.8-64 128v96c0 17.7-14.3 32-32 32H160c-17.7 0-32-14.3-32-32V401.6c-17.3-7.9-33.2-18.8-46.9-32.5L69.5 357.5C45.5 333.5 32 300.9 32 267V240c0-35.3 28.7-64 64-64h88c22.1 0 40 17.9 40 40s-17.9 40-40 40H128c-8.8 0-16 7.2-16 16s7.2 16 16 16h56c39.8 0 72-32.2 72-72z"],"fa-hand-holding-heart":["0 0 576 512","M148 76.6C148 34.3 182.3 0 224.6 0c20.3 0 39.8 8.1 54.1 22.4l9.3 9.3 9.3-9.3C311.6 8.1 331.1 0 351.4 0C393.7 0 428 34.3 428 76.6c0 20.3-8.1 39.8-22.4 54.1L302.1 234.1c-7.8 7.8-20.5 7.8-28.3 0L170.4 130.7C156.1 116.4 148 96.9 148 76.6zM568.2 336.3c13.1 17.8 9.3 42.8-8.5 55.9L433.1 485.5c-23.4 17.2-51.6 26.5-80.7 26.5H192 32c-17.7 0-32-14.3-32-32V416c0-17.7 14.3-32 32-32H68.8l44.9-36c22.7-18.2 50.9-28 80-28H272h16 64c17.7 0 32 14.3 32 32s-14.3 32-32 32H288 272c-8.8 0-16 7.2-16 16s7.2 16 16 16H392.6l119.7-88.2c17.8-13.1 42.8-9.3 55.9 8.5zM193.6 384l0 0-.9 0c.3 0 .6 0 .9 0z"],"fa-hand-sparkles":["0 0 640 512","M320 0c17.7 0 32 14.3 32 32V240c0 8.8 7.2 16 16 16s16-7.2 16-16V64c0-17.7 14.3-32 32-32s32 14.3 32 32V240c0 8.8 7.2 16 16 16s16-7.2 16-16V128c0-17.7 14.3-32 32-32s32 14.3 32 32V323.1c-11.9 4.8-21.3 14.9-25 27.8l-8.9 31.2L478.9 391C460.6 396.3 448 413 448 432c0 18.9 12.5 35.6 30.6 40.9C448.4 497.4 409.9 512 368 512H348.8c-59.6 0-116.9-22.9-160-64L76.4 341c-16-15.2-16.6-40.6-1.4-56.6s40.6-16.6 56.6-1.4l60.5 57.6c0-1.5-.1-3.1-.1-4.6V64c0-17.7 14.3-32 32-32s32 14.3 32 32V240c0 8.8 7.2 16 16 16s16-7.2 16-16V32c0-17.7 14.3-32 32-32zm-7.3 326.6c-1.1-3.9-4.7-6.6-8.7-6.6s-7.6 2.7-8.7 6.6L288 352l-25.4 7.3c-3.9 1.1-6.6 4.7-6.6 8.7s2.7 7.6 6.6 8.7L288 384l7.3 25.4c1.1 3.9 4.7 6.6 8.7 6.6s7.6-2.7 8.7-6.6L320 384l25.4-7.3c3.9-1.1 6.6-4.7 6.6-8.7s-2.7-7.6-6.6-8.7L320 352l-7.3-25.4zM104 120l48.3 13.8c4.6 1.3 7.7 5.5 7.7 10.2s-3.1 8.9-7.7 10.2L104 168 90.2 216.3c-1.3 4.6-5.5 7.7-10.2 7.7s-8.9-3.1-10.2-7.7L56 168 7.7 154.2C3.1 152.9 0 148.7 0 144s3.1-8.9 7.7-10.2L56 120 69.8 71.7C71.1 67.1 75.3 64 80 64s8.9 3.1 10.2 7.7L104 120zM584 408l48.3 13.8c4.6 1.3 7.7 5.5 7.7 10.2s-3.1 8.9-7.7 10.2L584 456l-13.8 48.3c-1.3 4.6-5.5 7.7-10.2 7.7s-8.9-3.1-10.2-7.7L536 456l-48.3-13.8c-4.6-1.3-7.7-5.5-7.7-10.2s3.1-8.9 7.7-10.2L536 408l13.8-48.3c1.3-4.6 5.5-7.7 10.2-7.7s8.9 3.1 10.2 7.7L584 408z"],"fa-hat-wizard":["0 0 512 512","M64 416L168.6 180.7c15.3-34.4 40.3-63.5 72-83.7l146.9-94c3-1.9 6.5-2.9 10-2.9C407.7 0 416 8.3 416 18.6v1.6c0 2.6-.5 5.1-1.4 7.5L354.8 176.9c-1.9 4.7-2.8 9.7-2.8 14.7c0 5.5 1.2 11 3.4 16.1L448 416H240.9l11.8-35.4 40.4-13.5c6.5-2.2 10.9-8.3 10.9-15.2s-4.4-13-10.9-15.2l-40.4-13.5-13.5-40.4C237 276.4 230.9 272 224 272s-13 4.4-15.2 10.9l-13.5 40.4-40.4 13.5C148.4 339 144 345.1 144 352s4.4 13 10.9 15.2l40.4 13.5L207.1 416H64zM279.6 141.5c-1.1-3.3-4.1-5.5-7.6-5.5s-6.5 2.2-7.6 5.5l-6.7 20.2-20.2 6.7c-3.3 1.1-5.5 4.1-5.5 7.6s2.2 6.5 5.5 7.6l20.2 6.7 6.7 20.2c1.1 3.3 4.1 5.5 7.6 5.5s6.5-2.2 7.6-5.5l6.7-20.2 20.2-6.7c3.3-1.1 5.5-4.1 5.5-7.6s-2.2-6.5-5.5-7.6l-20.2-6.7-6.7-20.2zM32 448H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32z"],"fa-headphones":["0 0 512 512","M256 80C149.9 80 62.4 159.4 49.6 262c9.4-3.8 19.6-6 30.4-6c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48c-44.2 0-80-35.8-80-80V384 336 288C0 146.6 114.6 32 256 32s256 114.6 256 256v48 48 16c0 44.2-35.8 80-80 80c-26.5 0-48-21.5-48-48V304c0-26.5 21.5-48 48-48c10.8 0 21 2.1 30.4 6C449.6 159.4 362.1 80 256 80z"],"fa-heart":["0 0 512 512","M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"],"fa-heart-crack":["0 0 512 512","M119.4 44.1c23.3-3.9 46.8-1.9 68.6 5.3l49.8 77.5-75.4 75.4c-1.5 1.5-2.4 3.6-2.3 5.8s1 4.2 2.6 5.7l112 104c2.9 2.7 7.4 2.9 10.5 .3s3.8-7 1.7-10.4l-60.4-98.1 90.7-75.6c2.6-2.1 3.5-5.7 2.4-8.8L296.8 61.8c28.5-16.7 62.4-23.2 95.7-17.6C461.5 55.6 512 115.2 512 185.1v5.8c0 41.5-17.2 81.2-47.6 109.5L283.7 469.1c-7.5 7-17.4 10.9-27.7 10.9s-20.2-3.9-27.7-10.9L47.6 300.4C17.2 272.1 0 232.4 0 190.9v-5.8c0-69.9 50.5-129.5 119.4-141z"],"fa-hourglass-half":["0 0 384 512","M32 0C14.3 0 0 14.3 0 32S14.3 64 32 64V75c0 42.4 16.9 83.1 46.9 113.1L146.7 256 78.9 323.9C48.9 353.9 32 394.6 32 437v11c-17.7 0-32 14.3-32 32s14.3 32 32 32H64 320h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V437c0-42.4-16.9-83.1-46.9-113.1L237.3 256l67.9-67.9c30-30 46.9-70.7 46.9-113.1V64c17.7 0 32-14.3 32-32s-14.3-32-32-32H320 64 32zM96 75V64H288V75c0 19-5.6 37.4-16 53H112c-10.3-15.6-16-34-16-53zm16 309c3.5-5.3 7.6-10.3 12.1-14.9L192 301.3l67.9 67.9c4.6 4.6 8.6 9.6 12.1 14.9H112z"],"fa-lock":["0 0 448 512","M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"],"fa-map":["0 0 576 512","M384 476.1L192 421.2V35.9L384 90.8V476.1zm32-1.2V88.4L543.1 37.5c15.8-6.3 32.9 5.3 32.9 22.3V394.6c0 9.8-6 18.6-15.1 22.3L416 474.8zM15.1 95.1L160 37.2V423.6L32.9 474.5C17.1 480.8 0 469.2 0 452.2V117.4c0-9.8 6-18.6 15.1-22.3z"],"fa-moon":["0 0 384 512","M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"],"fa-mountain-sun":["0 0 640 512","M560 160A80 80 0 1 0 560 0a80 80 0 1 0 0 160zM55.9 512H381.1h75H578.9c33.8 0 61.1-27.4 61.1-61.1c0-11.2-3.1-22.2-8.9-31.8l-132-216.3C495 196.1 487.8 192 480 192s-15 4.1-19.1 10.7l-48.2 79L286.8 81c-6.6-10.6-18.3-17-30.8-17s-24.1 6.4-30.8 17L8.6 426.4C3 435.3 0 445.6 0 456.1C0 487 25 512 55.9 512z"],"fa-mug-hot":["0 0 512 512","M88 0C74.7 0 64 10.7 64 24c0 38.9 23.4 59.4 39.1 73.1l1.1 1C120.5 112.3 128 119.9 128 136c0 13.3 10.7 24 24 24s24-10.7 24-24c0-38.9-23.4-59.4-39.1-73.1l-1.1-1C119.5 47.7 112 40.1 112 24c0-13.3-10.7-24-24-24zM32 192c-17.7 0-32 14.3-32 32V416c0 53 43 96 96 96H288c53 0 96-43 96-96h16c61.9 0 112-50.1 112-112s-50.1-112-112-112H352 32zm352 64h16c26.5 0 48 21.5 48 48s-21.5 48-48 48H384V256zM224 24c0-13.3-10.7-24-24-24s-24 10.7-24 24c0 38.9 23.4 59.4 39.1 73.1l1.1 1C232.5 112.3 240 119.9 240 136c0 13.3 10.7 24 24 24s24-10.7 24-24c0-38.9-23.4-59.4-39.1-73.1l-1.1-1C231.5 47.7 224 40.1 224 24z"],"fa-music":["0 0 512 512","M499.1 6.3c8.1 6 12.9 15.6 12.9 25.7v72V368c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6V147L192 223.8V432c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6V200 128c0-14.1 9.3-26.6 22.8-30.7l320-96c9.7-2.9 20.2-1.1 28.3 5z"],"fa-person-hiking":["0 0 384 512","M192 48a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm51.3 182.7L224.2 307l49.7 49.7c9 9 14.1 21.2 14.1 33.9V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V397.3l-73.9-73.9c-15.8-15.8-22.2-38.6-16.9-60.3l20.4-84c8.3-34.1 42.7-54.9 76.7-46.4c19 4.8 35.6 16.4 46.4 32.7L305.1 208H336V184c0-13.3 10.7-24 24-24s24 10.7 24 24v55.8c0 .1 0 .2 0 .2s0 .2 0 .2V488c0 13.3-10.7 24-24 24s-24-10.7-24-24V272H296.6c-16 0-31-8-39.9-21.4l-13.3-20zM81.1 471.9L117.3 334c3 4.2 6.4 8.2 10.1 11.9l41.9 41.9L142.9 488.1c-4.5 17.1-22 27.3-39.1 22.8s-27.3-22-22.8-39.1zm55.5-346L101.4 266.5c-3 12.1-14.9 19.9-27.2 17.9l-47.9-8c-14-2.3-22.9-16.3-19.2-30L31.9 155c9.5-34.8 41.1-59 77.2-59h4.2c15.6 0 27.1 14.7 23.3 29.8z"],"fa-rotate-left":["0 0 512 512","M48.5 224H40c-13.3 0-24-10.7-24-24V72c0-9.7 5.8-18.5 14.8-22.2s19.3-1.7 26.2 5.2L98.6 96.6c87.6-86.5 228.7-86.2 315.8 1c87.5 87.5 87.5 229.3 0 316.8s-229.3 87.5-316.8 0c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0c62.5 62.5 163.8 62.5 226.3 0s62.5-163.8 0-226.3c-62.2-62.2-162.7-62.5-225.3-1L185 183c6.9 6.9 8.9 17.2 5.2 26.2s-12.5 14.8-22.2 14.8H48.5z"],"fa-scroll":["0 0 576 512","M0 80v48c0 17.7 14.3 32 32 32H48 96V80c0-26.5-21.5-48-48-48S0 53.5 0 80zM112 32c10 13.4 16 30 16 48V384c0 35.3 28.7 64 64 64s64-28.7 64-64v-5.3c0-32.4 26.3-58.7 58.7-58.7H480V128c0-53-43-96-96-96H112zM464 480c61.9 0 112-50.1 112-112c0-8.8-7.2-16-16-16H314.7c-14.7 0-26.7 11.9-26.7 26.7V384c0 53-43 96-96 96H368h96z"],"fa-seedling":["0 0 512 512","M512 32c0 113.6-84.6 207.5-194.2 222c-7.1-53.4-30.6-101.6-65.3-139.3C290.8 46.3 364 0 448 0h32c17.7 0 32 14.3 32 32zM0 96C0 78.3 14.3 64 32 64H64c123.7 0 224 100.3 224 224v32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V320C100.3 320 0 219.7 0 96z"],"fa-shield-halved":["0 0 512 512","M256 0c4.6 0 9.2 1 13.4 2.9L457.7 82.8c22 9.3 38.4 31 38.3 57.2c-.5 99.2-41.3 280.7-213.6 363.2c-16.7 8-36.1 8-52.8 0C57.3 420.7 16.5 239.2 16 140c-.1-26.2 16.3-47.9 38.3-57.2L242.7 2.9C246.8 1 251.4 0 256 0zm0 66.8V444.8C394 378 431.1 230.1 432 141.4L256 66.8l0 0z"],"fa-skull":["0 0 512 512","M416 398.9c58.5-41.1 96-104.1 96-174.9C512 100.3 397.4 0 256 0S0 100.3 0 224c0 70.7 37.5 133.8 96 174.9c0 .4 0 .7 0 1.1v64c0 26.5 21.5 48 48 48h48V464c0-8.8 7.2-16 16-16s16 7.2 16 16v48h64V464c0-8.8 7.2-16 16-16s16 7.2 16 16v48h48c26.5 0 48-21.5 48-48V400c0-.4 0-.7 0-1.1zM96 256a64 64 0 1 1 128 0A64 64 0 1 1 96 256zm256-64a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"],"fa-spa":["0 0 576 512","M183.1 235.3c33.7 20.7 62.9 48.1 85.8 80.5c7 9.9 13.4 20.3 19.1 31c5.7-10.8 12.1-21.1 19.1-31c22.9-32.4 52.1-59.8 85.8-80.5C437.6 207.8 490.1 192 546 192h9.9c11.1 0 20.1 9 20.1 20.1C576 360.1 456.1 480 308.1 480H288 267.9C119.9 480 0 360.1 0 212.1C0 201 9 192 20.1 192H30c55.9 0 108.4 15.8 153.1 43.3zM301.5 37.6c15.7 16.9 61.1 71.8 84.4 164.6c-38 21.6-71.4 50.8-97.9 85.6c-26.5-34.8-59.9-63.9-97.9-85.6c23.2-92.8 68.6-147.7 84.4-164.6C278 33.9 282.9 32 288 32s10 1.9 13.5 5.6z"],"fa-star":["0 0 576 512","M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"],"fa-trash-can":["0 0 448 512","M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"],"fa-tree":["0 0 448 512","M210.6 5.9L62 169.4c-3.9 4.2-6 9.8-6 15.5C56 197.7 66.3 208 79.1 208H104L30.6 281.4c-4.2 4.2-6.6 10-6.6 16C24 309.9 34.1 320 46.6 320H80L5.4 409.5C1.9 413.7 0 419 0 424.5c0 13 10.5 23.5 23.5 23.5H192v32c0 17.7 14.3 32 32 32s32-14.3 32-32V448H424.5c13 0 23.5-10.5 23.5-23.5c0-5.5-1.9-10.8-5.4-15L368 320h33.4c12.5 0 22.6-10.1 22.6-22.6c0-6-2.4-11.8-6.6-16L344 208h24.9c12.7 0 23.1-10.3 23.1-23.1c0-5.7-2.1-11.3-6-15.5L237.4 5.9C234 2.1 229.1 0 224 0s-10 2.1-13.4 5.9z"],"fa-user-shield":["0 0 640 512","M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c1.8 0 3.5-.2 5.3-.5c-76.3-55.1-99.8-141-103.1-200.2c-16.1-4.8-33.1-7.3-50.7-7.3H178.3zm308.8-78.3l-120 48C358 277.4 352 286.2 352 296c0 63.3 25.9 168.8 134.8 214.2c5.9 2.5 12.6 2.5 18.5 0C614.1 464.8 640 359.3 640 296c0-9.8-6-18.6-15.1-22.3l-120-48c-5.7-2.3-12.1-2.3-17.8 0zM591.4 312c-3.9 50.7-27.2 116.7-95.4 149.7V273.8L591.4 312z"],"fa-utensils":["0 0 448 512","M416 0C400 0 288 32 288 176V288c0 35.3 28.7 64 64 64h32V480c0 17.7 14.3 32 32 32s32-14.3 32-32V352 240 32c0-17.7-14.3-32-32-32zM64 16C64 7.8 57.9 1 49.7 .1S34.2 4.6 32.4 12.5L2.1 148.8C.7 155.1 0 161.5 0 167.9c0 45.9 35.1 83.6 80 87.7V480c0 17.7 14.3 32 32 32s32-14.3 32-32V255.6c44.9-4.1 80-41.8 80-87.7c0-6.4-.7-12.8-2.1-19.1L191.6 12.5c-1.8-8-9.3-13.3-17.4-12.4S160 7.8 160 16V150.2c0 5.4-4.4 9.8-9.8 9.8c-5.1 0-9.3-3.9-9.8-9L127.9 14.6C127.2 6.3 120.3 0 112 0s-15.2 6.3-15.9 14.6L83.7 151c-.5 5.1-4.7 9-9.8 9c-5.4 0-9.8-4.4-9.8-9.8V16zm48.3 152l-.3 0-.3 0 .3-.7 .3 .7z"],"fa-wand-sparkles":["0 0 512 512","M464 6.1c9.5-8.5 24-8.1 33 .9l8 8c9 9 9.4 23.5 .9 33l-85.8 95.9c-2.6 2.9-4.1 6.7-4.1 10.7V176c0 8.8-7.2 16-16 16H384.2c-4.6 0-8.9 1.9-11.9 5.3L100.7 500.9C94.3 508 85.3 512 75.8 512c-8.8 0-17.3-3.5-23.5-9.8L9.7 459.7C3.5 453.4 0 445 0 436.2c0-9.5 4-18.5 11.1-24.8l111.6-99.8c3.4-3 5.3-7.4 5.3-11.9V272c0-8.8 7.2-16 16-16h34.6c3.9 0 7.7-1.5 10.7-4.1L464 6.1zM432 288c3.6 0 6.7 2.4 7.7 5.8l14.8 51.7 51.7 14.8c3.4 1 5.8 4.1 5.8 7.7s-2.4 6.7-5.8 7.7l-51.7 14.8-14.8 51.7c-1 3.4-4.1 5.8-7.7 5.8s-6.7-2.4-7.7-5.8l-14.8-51.7-51.7-14.8c-3.4-1-5.8-4.1-5.8-7.7s2.4-6.7 5.8-7.7l51.7-14.8 14.8-51.7c1-3.4 4.1-5.8 7.7-5.8zM87.7 69.8l14.8 51.7 51.7 14.8c3.4 1 5.8 4.1 5.8 7.7s-2.4 6.7-5.8 7.7l-51.7 14.8L87.7 218.2c-1 3.4-4.1 5.8-7.7 5.8s-6.7-2.4-7.7-5.8L57.5 166.5 5.8 151.7c-3.4-1-5.8-4.1-5.8-7.7s2.4-6.7 5.8-7.7l51.7-14.8L72.3 69.8c1-3.4 4.1-5.8 7.7-5.8s6.7 2.4 7.7 5.8zM208 0c3.7 0 6.9 2.5 7.8 6.1l6.8 27.3 27.3 6.8c3.6 .9 6.1 4.1 6.1 7.8s-2.5 6.9-6.1 7.8l-27.3 6.8-6.8 27.3c-.9 3.6-4.1 6.1-7.8 6.1s-6.9-2.5-7.8-6.1l-6.8-27.3-27.3-6.8c-3.6-.9-6.1-4.1-6.1-7.8s2.5-6.9 6.1-7.8l27.3-6.8 6.8-27.3c.9-3.6 4.1-6.1 7.8-6.1z"],"fa-whatsapp":["0 0 448 512","M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"]};
+const ICONOS = {"fa-bandage":["0 0 640 512","M480 416h96c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H480V416zM448 96H192V416H448V96zM64 96C28.7 96 0 124.7 0 160V352c0 35.3 28.7 64 64 64h96V96H64zM248 208a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm120-24a24 24 0 1 1 0 48 24 24 0 1 1 0-48zM248 304a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm120-24a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"],"fa-bath":["0 0 512 512","M96 77.3c0-7.3 5.9-13.3 13.3-13.3c3.5 0 6.9 1.4 9.4 3.9l14.9 14.9C130 91.8 128 101.7 128 112c0 19.9 7.2 38 19.2 52c-5.3 9.2-4 21.1 3.8 29c9.4 9.4 24.6 9.4 33.9 0L289 89c9.4-9.4 9.4-24.6 0-33.9c-7.9-7.9-19.8-9.1-29-3.8C246 39.2 227.9 32 208 32c-10.3 0-20.2 2-29.2 5.5L163.9 22.6C149.4 8.1 129.7 0 109.3 0C66.6 0 32 34.6 32 77.3V256c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H96V77.3zM32 352v16c0 28.4 12.4 54 32 71.6V480c0 17.7 14.3 32 32 32s32-14.3 32-32V464H384v16c0 17.7 14.3 32 32 32s32-14.3 32-32V439.6c19.6-17.6 32-43.1 32-71.6V352H32z"],"fa-battery-quarter":["0 0 576 512","M464 160c8.8 0 16 7.2 16 16V336c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16H464zM80 96C35.8 96 0 131.8 0 176V336c0 44.2 35.8 80 80 80H464c44.2 0 80-35.8 80-80V320c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32V176c0-44.2-35.8-80-80-80H80zm112 96H96V320h96V192z"],"fa-bed":["0 0 640 512","M32 32c17.7 0 32 14.3 32 32V320H288V160c0-17.7 14.3-32 32-32H544c53 0 96 43 96 96V448c0 17.7-14.3 32-32 32s-32-14.3-32-32V416H352 320 64v32c0 17.7-14.3 32-32 32s-32-14.3-32-32V64C0 46.3 14.3 32 32 32zm144 96a80 80 0 1 1 0 160 80 80 0 1 1 0-160z"],"fa-bolt":["0 0 448 512","M349.4 44.6c5.9-13.7 1.5-29.7-10.6-38.5s-28.6-8-39.9 1.8l-256 224c-10 8.8-13.6 22.9-8.9 35.3S50.7 288 64 288H175.5L98.6 467.4c-5.9 13.7-1.5 29.7 10.6 38.5s28.6 8 39.9-1.8l256-224c10-8.8 13.6-22.9 8.9-35.3s-16.6-20.7-30-20.7H272.5L349.4 44.6z"],"fa-book-open":["0 0 576 512","M249.6 471.5c10.8 3.8 22.4-4.1 22.4-15.5V78.6c0-4.2-1.6-8.4-5-11C247.4 52 202.4 32 144 32C93.5 32 46.3 45.3 18.1 56.1C6.8 60.5 0 71.7 0 83.8V454.1c0 11.9 12.8 20.2 24.1 16.5C55.6 460.1 105.5 448 144 448c33.9 0 79 14 105.6 23.5zm76.8 0C353 462 398.1 448 432 448c38.5 0 88.4 12.1 119.9 22.6c11.3 3.8 24.1-4.6 24.1-16.5V83.8c0-12.1-6.8-23.3-18.1-27.6C529.7 45.3 482.5 32 432 32c-58.4 0-103.4 20-123 35.6c-3.3 2.6-5 6.8-5 11V456c0 11.4 11.7 19.3 22.4 15.5z"],"fa-box-open":["0 0 640 512","M58.9 42.1c3-6.1 9.6-9.6 16.3-8.7L320 64 564.8 33.4c6.7-.8 13.3 2.7 16.3 8.7l41.7 83.4c9 17.9-.6 39.6-19.8 45.1L439.6 217.3c-13.9 4-28.8-1.9-36.2-14.3L320 64 236.6 203c-7.4 12.4-22.3 18.3-36.2 14.3L37.1 170.6c-19.3-5.5-28.8-27.2-19.8-45.1L58.9 42.1zM321.1 128l54.9 91.4c14.9 24.8 44.6 36.6 72.5 28.6L576 211.6v167c0 22-15 41.2-36.4 46.6l-204.1 51c-10.2 2.6-20.9 2.6-31 0l-204.1-51C79 419.7 64 400.5 64 378.5v-167L191.6 248c27.8 8 57.6-3.8 72.5-28.6L318.9 128h2.2z"],"fa-broom":["0 0 576 512","M566.6 54.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192-34.7-34.7c-4.2-4.2-10-6.6-16-6.6c-12.5 0-22.6 10.1-22.6 22.6v29.1L364.3 320h29.1c12.5 0 22.6-10.1 22.6-22.6c0-6-2.4-11.8-6.6-16l-34.7-34.7 192-192zM341.1 353.4L222.6 234.9c-42.7-3.7-85.2 11.7-115.8 42.3l-8 8C76.5 307.5 64 337.7 64 369.2c0 6.8 7.1 11.2 13.2 8.2l51.1-25.5c5-2.5 9.5 4.1 5.4 7.9L7.3 473.4C2.7 477.6 0 483.6 0 489.9C0 502.1 9.9 512 22.1 512l173.3 0c38.8 0 75.9-15.4 103.4-42.8c30.6-30.6 45.9-73.1 42.3-115.8z"],"fa-cake-candles":["0 0 448 512","M86.4 5.5L61.8 47.6C58 54.1 56 61.6 56 69.2V72c0 22.1 17.9 40 40 40s40-17.9 40-40V69.2c0-7.6-2-15-5.8-21.6L105.6 5.5C103.6 2.1 100 0 96 0s-7.6 2.1-9.6 5.5zm128 0L189.8 47.6c-3.8 6.5-5.8 14-5.8 21.6V72c0 22.1 17.9 40 40 40s40-17.9 40-40V69.2c0-7.6-2-15-5.8-21.6L233.6 5.5C231.6 2.1 228 0 224 0s-7.6 2.1-9.6 5.5zM317.8 47.6c-3.8 6.5-5.8 14-5.8 21.6V72c0 22.1 17.9 40 40 40s40-17.9 40-40V69.2c0-7.6-2-15-5.8-21.6L361.6 5.5C359.6 2.1 356 0 352 0s-7.6 2.1-9.6 5.5L317.8 47.6zM128 176c0-17.7-14.3-32-32-32s-32 14.3-32 32v48c-35.3 0-64 28.7-64 64v71c8.3 5.2 18.1 9 28.8 9c13.5 0 27.2-6.1 38.4-13.4c5.4-3.5 9.9-7.1 13-9.7c1.5-1.3 2.7-2.4 3.5-3.1c.4-.4 .7-.6 .8-.8l.1-.1 0 0 0 0s0 0 0 0s0 0 0 0c3.1-3.2 7.4-4.9 11.9-4.8s8.6 2.1 11.6 5.4l0 0 0 0 .1 .1c.1 .1 .4 .4 .7 .7c.7 .7 1.7 1.7 3.1 3c2.8 2.6 6.8 6.1 11.8 9.5c10.2 7.1 23 13.1 36.3 13.1s26.1-6 36.3-13.1c5-3.5 9-6.9 11.8-9.5c1.4-1.3 2.4-2.3 3.1-3c.3-.3 .6-.6 .7-.7l.1-.1c3-3.5 7.4-5.4 12-5.4s9 2 12 5.4l.1 .1c.1 .1 .4 .4 .7 .7c.7 .7 1.7 1.7 3.1 3c2.8 2.6 6.8 6.1 11.8 9.5c10.2 7.1 23 13.1 36.3 13.1s26.1-6 36.3-13.1c5-3.5 9-6.9 11.8-9.5c1.4-1.3 2.4-2.3 3.1-3c.3-.3 .6-.6 .7-.7l.1-.1c2.9-3.4 7.1-5.3 11.6-5.4s8.7 1.6 11.9 4.8l0 0 0 0 0 0 .1 .1c.2 .2 .4 .4 .8 .8c.8 .7 1.9 1.8 3.5 3.1c3.1 2.6 7.5 6.2 13 9.7c11.2 7.3 24.9 13.4 38.4 13.4c10.7 0 20.5-3.9 28.8-9V288c0-35.3-28.7-64-64-64V176c0-17.7-14.3-32-32-32s-32 14.3-32 32v48H256V176c0-17.7-14.3-32-32-32s-32 14.3-32 32v48H128V176zM448 394.6c-8.5 3.3-18.2 5.4-28.8 5.4c-22.5 0-42.4-9.9-55.8-18.6c-4.1-2.7-7.8-5.4-10.9-7.8c-2.8 2.4-6.1 5-9.8 7.5C329.8 390 310.6 400 288 400s-41.8-10-54.6-18.9c-3.5-2.4-6.7-4.9-9.4-7.2c-2.7 2.3-5.9 4.7-9.4 7.2C201.8 390 182.6 400 160 400s-41.8-10-54.6-18.9c-3.7-2.6-7-5.2-9.8-7.5c-3.1 2.4-6.8 5.1-10.9 7.8C71.2 390.1 51.3 400 28.8 400c-10.6 0-20.3-2.2-28.8-5.4V480c0 17.7 14.3 32 32 32H416c17.7 0 32-14.3 32-32V394.6z"],"fa-camera":["0 0 512 512","M149.1 64.8L138.7 96H64C28.7 96 0 124.7 0 160V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H373.3L362.9 64.8C356.4 45.2 338.1 32 317.4 32H194.6c-20.7 0-39 13.2-45.5 32.8zM256 192a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"],"fa-car-side":["0 0 640 512","M171.3 96H224v96H111.3l30.4-75.9C146.5 104 158.2 96 171.3 96zM272 192V96h81.2c9.7 0 18.9 4.4 25 12l67.2 84H272zm256.2 1L428.2 68c-18.2-22.8-45.8-36-75-36H171.3c-39.3 0-74.6 23.9-89.1 60.3L40.6 196.4C16.8 205.8 0 228.9 0 256V368c0 17.7 14.3 32 32 32H65.3c7.6 45.4 47.1 80 94.7 80s87.1-34.6 94.7-80H385.3c7.6 45.4 47.1 80 94.7 80s87.1-34.6 94.7-80H608c17.7 0 32-14.3 32-32V320c0-65.2-48.8-119-111.8-127zM434.7 368a48 48 0 1 1 90.5 32 48 48 0 1 1 -90.5-32zM160 336a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"],"fa-check":["0 0 448 512","M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"],"fa-chevron-left":["0 0 320 512","M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"],"fa-chevron-right":["0 0 320 512","M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"],"fa-cloud":["0 0 640 512","M0 336c0 79.5 64.5 144 144 144H512c70.7 0 128-57.3 128-128c0-61.9-44-113.6-102.4-125.4c4.1-10.7 6.4-22.4 6.4-34.6c0-53-43-96-96-96c-19.7 0-38.1 6-53.3 16.2C367 64.2 315.3 32 256 32C167.6 32 96 103.6 96 192c0 2.7 .1 5.4 .2 8.1C40.2 219.8 0 273.2 0 336z"],"fa-compass":["0 0 512 512","M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm50.7-186.9L162.4 380.6c-19.4 7.5-38.5-11.6-31-31l55.5-144.3c3.3-8.5 9.9-15.1 18.4-18.4l144.3-55.5c19.4-7.5 38.5 11.6 31 31L325.1 306.7c-3.2 8.5-9.9 15.1-18.4 18.4zM288 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"],"fa-copy":["0 0 512 512","M272 0H396.1c12.7 0 24.9 5.1 33.9 14.1l67.9 67.9c9 9 14.1 21.2 14.1 33.9V336c0 26.5-21.5 48-48 48H272c-26.5 0-48-21.5-48-48V48c0-26.5 21.5-48 48-48zM48 128H192v64H64V448H256V416h64v48c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V176c0-26.5 21.5-48 48-48z"],"fa-couch":["0 0 640 512","M64 160C64 89.3 121.3 32 192 32H448c70.7 0 128 57.3 128 128v33.6c-36.5 7.4-64 39.7-64 78.4v48H128V272c0-38.7-27.5-71-64-78.4V160zM544 272c0-20.9 13.4-38.7 32-45.3c5-1.8 10.4-2.7 16-2.7c26.5 0 48 21.5 48 48V448c0 17.7-14.3 32-32 32H576c-17.7 0-32-14.3-32-32H96c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V272c0-26.5 21.5-48 48-48c5.6 0 11 1 16 2.7c18.6 6.6 32 24.4 32 45.3v48 32h32H512h32V320 272z"],"fa-crown":["0 0 576 512","M309 106c11.4-7 19-19.7 19-34c0-22.1-17.9-40-40-40s-40 17.9-40 40c0 14.4 7.6 27 19 34L209.7 220.6c-9.1 18.2-32.7 23.4-48.6 10.7L72 160c5-6.7 8-15 8-24c0-22.1-17.9-40-40-40S0 113.9 0 136s17.9 40 40 40c.2 0 .5 0 .7 0L86.4 427.4c5.5 30.4 32 52.6 63 52.6H426.6c30.9 0 57.4-22.1 63-52.6L535.3 176c.2 0 .5 0 .7 0c22.1 0 40-17.9 40-40s-17.9-40-40-40s-40 17.9-40 40c0 9 3 17.3 8 24l-89.1 71.3c-15.9 12.7-39.5 7.5-48.6-10.7L309 106z"],"fa-dice-d20":["0 0 512 512","M48.7 125.8l53.2 31.9c7.8 4.7 17.8 2 22.2-5.9L201.6 12.1c3-5.4-.9-12.1-7.1-12.1c-1.6 0-3.2 .5-4.6 1.4L47.9 98.8c-9.6 6.6-9.2 20.9 .8 26.9zM16 171.7V295.3c0 8 10.4 11 14.7 4.4l60-92c5-7.6 2.6-17.8-5.2-22.5L40.2 158C29.6 151.6 16 159.3 16 171.7zM310.4 12.1l77.6 139.6c4.4 7.9 14.5 10.6 22.2 5.9l53.2-31.9c10-6 10.4-20.3 .8-26.9L322.1 1.4c-1.4-.9-3-1.4-4.6-1.4c-6.2 0-10.1 6.7-7.1 12.1zM496 171.7c0-12.4-13.6-20.1-24.2-13.7l-45.3 27.2c-7.8 4.7-10.1 14.9-5.2 22.5l60 92c4.3 6.7 14.7 3.6 14.7-4.4V171.7zm-49.3 246L286.1 436.6c-8.1 .9-14.1 7.8-14.1 15.9v52.8c0 3.7 3 6.8 6.8 6.8c.8 0 1.6-.1 2.4-.4l172.7-64c6.1-2.2 10.1-8 10.1-14.5c0-9.3-8.1-16.5-17.3-15.4zM233.2 512c3.7 0 6.8-3 6.8-6.8V452.6c0-8.1-6.1-14.9-14.1-15.9l-160.6-19c-9.2-1.1-17.3 6.1-17.3 15.4c0 6.5 4 12.3 10.1 14.5l172.7 64c.8 .3 1.6 .4 2.4 .4zM41.7 382.9l170.9 20.2c7.8 .9 13.4-7.5 9.5-14.3l-85.7-150c-5.9-10.4-20.7-10.8-27.3-.8L30.2 358.2c-6.5 9.9-.3 23.3 11.5 24.7zm439.6-24.8L402.9 238.1c-6.5-10-21.4-9.6-27.3 .8L290.2 388.5c-3.9 6.8 1.6 15.2 9.5 14.3l170.1-20c11.8-1.4 18-14.7 11.5-24.6zm-216.9 11l78.4-137.2c6.1-10.7-1.6-23.9-13.9-23.9H183.1c-12.3 0-20 13.3-13.9 23.9l78.4 137.2c3.7 6.4 13 6.4 16.7 0zM174.4 176H337.6c12.2 0 19.9-13.1 14-23.8l-80-144c-2.8-5.1-8.2-8.2-14-8.2h-3.2c-5.8 0-11.2 3.2-14 8.2l-80 144c-5.9 10.7 1.8 23.8 14 23.8z"],"fa-dove":["0 0 512 512","M160.8 96.5c14 17 31 30.9 49.5 42.2c25.9 15.8 53.7 25.9 77.7 31.6V138.8C265.8 108.5 250 71.5 248.6 28c-.4-11.3-7.5-21.5-18.4-24.4c-7.6-2-15.8-.2-21 5.8c-13.3 15.4-32.7 44.6-48.4 87.2zM320 144v30.6l0 0v1.3l0 0 0 32.1c-60.8-5.1-185-43.8-219.3-157.2C97.4 40 87.9 32 76.6 32c-7.9 0-15.3 3.9-18.8 11C46.8 65.9 32 112.1 32 176c0 116.9 80.1 180.5 118.4 202.8L11.8 416.6C6.7 418 2.6 421.8 .9 426.8s-.8 10.6 2.3 14.8C21.7 466.2 77.3 512 160 512c3.6 0 7.2-1.2 10-3.5L245.6 448H320c88.4 0 160-71.6 160-160V128l29.9-44.9c1.3-2 2.1-4.4 2.1-6.8c0-6.8-5.5-12.3-12.3-12.3H400c-44.2 0-80 35.8-80 80zm80-16a16 16 0 1 1 0 32 16 16 0 1 1 0-32z"],"fa-dragon":["0 0 640 512","M352 124.5l-51.9-13c-6.5-1.6-11.3-7.1-12-13.8s2.8-13.1 8.7-16.1l40.8-20.4L294.4 28.8c-5.5-4.1-7.8-11.3-5.6-17.9S297.1 0 304 0H416h32 16c30.2 0 58.7 14.2 76.8 38.4l57.6 76.8c6.2 8.3 9.6 18.4 9.6 28.8c0 26.5-21.5 48-48 48H538.5c-17 0-33.3-6.7-45.3-18.7L480 160H448v21.5c0 24.8 12.8 47.9 33.8 61.1l106.6 66.6c32.1 20.1 51.6 55.2 51.6 93.1C640 462.9 590.9 512 530.2 512H496 432 32.3c-3.3 0-6.6-.4-9.6-1.4C13.5 507.8 6 501 2.4 492.1C1 488.7 .2 485.2 0 481.4c-.2-3.7 .3-7.3 1.3-10.7c2.8-9.2 9.6-16.7 18.6-20.4c3-1.2 6.2-2 9.5-2.2L433.3 412c8.3-.7 14.7-7.7 14.7-16.1c0-4.3-1.7-8.4-4.7-11.4l-44.4-44.4c-30-30-46.9-70.7-46.9-113.1V181.5v-57zM512 72.3c0-.1 0-.2 0-.3s0-.2 0-.3v.6zm-1.3 7.4L464.3 68.1c-.2 1.3-.3 2.6-.3 3.9c0 13.3 10.7 24 24 24c10.6 0 19.5-6.8 22.7-16.3zM130.9 116.5c16.3-14.5 40.4-16.2 58.5-4.1l130.6 87V227c0 32.8 8.4 64.8 24 93H112c-6.7 0-12.7-4.2-15-10.4s-.5-13.3 4.6-17.7L171 232.3 18.4 255.8c-7 1.1-13.9-2.6-16.9-9s-1.5-14.1 3.8-18.8L130.9 116.5z"],"fa-drumstick-bite":["0 0 512 512","M160 265.2c0 8.5-3.4 16.6-9.4 22.6l-26.8 26.8c-12.3 12.3-32.5 11.4-49.4 7.2C69.8 320.6 65 320 60 320c-33.1 0-60 26.9-60 60s26.9 60 60 60c6.3 0 12 5.7 12 12c0 33.1 26.9 60 60 60s60-26.9 60-60c0-5-.6-9.8-1.8-14.5c-4.2-16.9-5.2-37.1 7.2-49.4l26.8-26.8c6-6 14.1-9.4 22.6-9.4H336c6.3 0 12.4-.3 18.5-1c11.9-1.2 16.4-15.5 10.8-26c-8.5-15.8-13.3-33.8-13.3-53c0-61.9 50.1-112 112-112c8 0 15.7 .8 23.2 2.4c11.7 2.5 24.1-5.9 22-17.6C494.5 62.5 422.5 0 336 0C238.8 0 160 78.8 160 176v89.2z"],"fa-dumbbell":["0 0 640 512","M96 64c0-17.7 14.3-32 32-32h32c17.7 0 32 14.3 32 32V224v64V448c0 17.7-14.3 32-32 32H128c-17.7 0-32-14.3-32-32V384H64c-17.7 0-32-14.3-32-32V288c-17.7 0-32-14.3-32-32s14.3-32 32-32V160c0-17.7 14.3-32 32-32H96V64zm448 0v64h32c17.7 0 32 14.3 32 32v64c17.7 0 32 14.3 32 32s-14.3 32-32 32v64c0 17.7-14.3 32-32 32H544v64c0 17.7-14.3 32-32 32H480c-17.7 0-32-14.3-32-32V288 224 64c0-17.7 14.3-32 32-32h32c17.7 0 32 14.3 32 32zM416 224v64H224V224H416z"],"fa-eye":["0 0 576 512","M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"],"fa-feather-pointed":["0 0 512 512","M278.5 215.6L23 471c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l74.8-74.8c7.4 4.6 15.3 8.2 23.8 10.5C200.3 452.8 270 454.5 338 409.4c12.2-8.1 5.8-25.4-8.8-25.4l-16.1 0c-5.1 0-9.2-4.1-9.2-9.2c0-4.1 2.7-7.6 6.5-8.8l97.7-29.3c3.4-1 6.4-3.1 8.4-6.1c4.4-6.4 8.6-12.9 12.6-19.6c6.2-10.3-1.5-23-13.5-23l-38.6 0c-5.1 0-9.2-4.1-9.2-9.2c0-4.1 2.7-7.6 6.5-8.8l80.9-24.3c4.6-1.4 8.4-4.8 10.2-9.3C494.5 163 507.8 86.1 511.9 36.8c.8-9.9-3-19.6-10-26.6s-16.7-10.8-26.6-10C391.5 7 228.5 40.5 137.4 131.6C57.3 211.7 56.7 302.3 71.3 356.4c2.1 7.9 12 9.6 17.8 3.8L253.6 195.8c6.2-6.2 16.4-6.2 22.6 0c5.4 5.4 6.1 13.6 2.2 19.8z"],"fa-film":["0 0 512 512","M0 96C0 60.7 28.7 32 64 32H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM48 368v32c0 8.8 7.2 16 16 16H96c8.8 0 16-7.2 16-16V368c0-8.8-7.2-16-16-16H64c-8.8 0-16 7.2-16 16zm368-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V368c0-8.8-7.2-16-16-16H416zM48 240v32c0 8.8 7.2 16 16 16H96c8.8 0 16-7.2 16-16V240c0-8.8-7.2-16-16-16H64c-8.8 0-16 7.2-16 16zm368-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V240c0-8.8-7.2-16-16-16H416zM48 112v32c0 8.8 7.2 16 16 16H96c8.8 0 16-7.2 16-16V112c0-8.8-7.2-16-16-16H64c-8.8 0-16 7.2-16 16zM416 96c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V112c0-8.8-7.2-16-16-16H416zM160 128v64c0 17.7 14.3 32 32 32H320c17.7 0 32-14.3 32-32V128c0-17.7-14.3-32-32-32H192c-17.7 0-32 14.3-32 32zm32 160c-17.7 0-32 14.3-32 32v64c0 17.7 14.3 32 32 32H320c17.7 0 32-14.3 32-32V320c0-17.7-14.3-32-32-32H192z"],"fa-fire":["0 0 448 512","M159.3 5.4c7.8-7.3 19.9-7.2 27.7 .1c27.6 25.9 53.5 53.8 77.7 84c11-14.4 23.5-30.1 37-42.9c7.9-7.4 20.1-7.4 28 .1c34.6 33 63.9 76.6 84.5 118c20.3 40.8 33.8 82.5 33.8 111.9C448 404.2 348.2 512 224 512C98.4 512 0 404.1 0 276.5c0-38.4 17.8-85.3 45.4-131.7C73.3 97.7 112.7 48.6 159.3 5.4zM225.7 416c25.3 0 47.7-7 68.8-21c42.1-29.4 53.4-88.2 28.1-134.4c-4.5-9-16-9.6-22.5-2l-25.2 29.3c-6.6 7.6-18.5 7.4-24.7-.5c-16.5-21-46-58.5-62.8-79.8c-6.3-8-18.3-8.1-24.7-.1c-33.8 42.5-50.8 69.3-50.8 99.4C112 375.4 162.6 416 225.7 416z"],"fa-fire-flame-curved":["0 0 384 512","M153.6 29.9l16-21.3C173.6 3.2 180 0 186.7 0C198.4 0 208 9.6 208 21.3V43.5c0 13.1 5.4 25.7 14.9 34.7L307.6 159C356.4 205.6 384 270.2 384 337.7C384 434 306 512 209.7 512H192C86 512 0 426 0 320v-3.8c0-48.8 19.4-95.6 53.9-130.1l3.5-3.5c4.2-4.2 10-6.6 16-6.6C85.9 176 96 186.1 96 198.6V288c0 35.3 28.7 64 64 64s64-28.7 64-64v-3.9c0-18-7.2-35.3-19.9-48l-38.6-38.6c-24-24-37.5-56.7-37.5-90.7c0-27.7 9-54.8 25.6-76.9z"],"fa-flask":["0 0 448 512","M288 0H160 128C110.3 0 96 14.3 96 32s14.3 32 32 32V196.8c0 11.8-3.3 23.5-9.5 33.5L10.3 406.2C3.6 417.2 0 429.7 0 442.6C0 480.9 31.1 512 69.4 512H378.6c38.3 0 69.4-31.1 69.4-69.4c0-12.8-3.6-25.4-10.3-36.4L329.5 230.4c-6.2-10.1-9.5-21.7-9.5-33.5V64c17.7 0 32-14.3 32-32s-14.3-32-32-32H288zM192 196.8V64h64V196.8c0 23.7 6.6 46.9 19 67.1L309.5 320h-171L173 263.9c12.4-20.2 19-43.4 19-67.1z"],"fa-gear":["0 0 512 512","M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.7c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.7c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.7c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336a80 80 0 1 0 0-160 80 80 0 1 0 0 160z"],"fa-gem":["0 0 512 512","M116.7 33.8c4.5-6.1 11.7-9.8 19.3-9.8H376c7.6 0 14.8 3.6 19.3 9.8l112 152c6.8 9.2 6.1 21.9-1.5 30.4l-232 256c-4.5 5-11 7.9-17.8 7.9s-13.2-2.9-17.8-7.9l-232-256c-7.7-8.5-8.3-21.2-1.5-30.4l112-152zm38.5 39.8c-3.3 2.5-4.2 7-2.1 10.5l57.4 95.6L63.3 192c-4.1 .3-7.3 3.8-7.3 8s3.2 7.6 7.3 8l192 16c.4 0 .9 0 1.3 0l192-16c4.1-.3 7.3-3.8 7.3-8s-3.2-7.6-7.3-8L301.5 179.8l57.4-95.6c2.1-3.5 1.2-8.1-2.1-10.5s-7.9-2-10.7 1L256 172.2 165.9 74.6c-2.8-3-7.4-3.4-10.7-1z"],"fa-ghost":["0 0 384 512","M40.1 467.1l-11.2 9c-3.2 2.5-7.1 3.9-11.1 3.9C8 480 0 472 0 462.2V192C0 86 86 0 192 0S384 86 384 192V462.2c0 9.8-8 17.8-17.8 17.8c-4 0-7.9-1.4-11.1-3.9l-11.2-9c-13.4-10.7-32.8-9-44.1 3.9L269.3 506c-3.3 3.8-8.2 6-13.3 6s-9.9-2.2-13.3-6l-26.6-30.5c-12.7-14.6-35.4-14.6-48.2 0L141.3 506c-3.3 3.8-8.2 6-13.3 6s-9.9-2.2-13.3-6L84.2 471c-11.3-12.9-30.7-14.6-44.1-3.9zM160 192a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm96 32a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"],"fa-gift":["0 0 512 512","M190.5 68.8L225.3 128H224 152c-22.1 0-40-17.9-40-40s17.9-40 40-40h2.2c14.9 0 28.8 7.9 36.3 20.8zM64 88c0 14.4 3.5 28 9.6 40H32c-17.7 0-32 14.3-32 32v64c0 17.7 14.3 32 32 32H480c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32H438.4c6.1-12 9.6-25.6 9.6-40c0-48.6-39.4-88-88-88h-2.2c-31.9 0-61.5 16.9-77.7 44.4L256 85.5l-24.1-41C215.7 16.9 186.1 0 154.2 0H152C103.4 0 64 39.4 64 88zm336 0c0 22.1-17.9 40-40 40H288h-1.3l34.8-59.2C329.1 55.9 342.9 48 357.8 48H360c22.1 0 40 17.9 40 40zM32 288V464c0 26.5 21.5 48 48 48H224V288H32zM288 512H432c26.5 0 48-21.5 48-48V288H288V512z"],"fa-hammer":["0 0 576 512","M413.5 237.5c-28.2 4.8-58.2-3.6-80-25.4l-38.1-38.1C280.4 159 272 138.8 272 117.6V105.5L192.3 62c-5.3-2.9-8.6-8.6-8.3-14.7s3.9-11.5 9.5-14l47.2-21C259.1 4.2 279 0 299.2 0h18.1c36.7 0 72 14 98.7 39.1l44.6 42c24.2 22.8 33.2 55.7 26.6 86L503 183l8-8c9.4-9.4 24.6-9.4 33.9 0l24 24c9.4 9.4 9.4 24.6 0 33.9l-88 88c-9.4 9.4-24.6 9.4-33.9 0l-24-24c-9.4-9.4-9.4-24.6 0-33.9l8-8-17.5-17.5zM27.4 377.1L260.9 182.6c3.5 4.9 7.5 9.6 11.8 14l38.1 38.1c6 6 12.4 11.2 19.2 15.7L134.9 484.6c-14.5 17.4-36 27.4-58.6 27.4C34.1 512 0 477.8 0 435.7c0-22.6 10.1-44.1 27.4-58.6z"],"fa-hand-fist":["0 0 448 512","M192 0c17.7 0 32 14.3 32 32V144H160V32c0-17.7 14.3-32 32-32zM64 64c0-17.7 14.3-32 32-32s32 14.3 32 32v80H64V64zm192 0c0-17.7 14.3-32 32-32s32 14.3 32 32v96c0 17.7-14.3 32-32 32s-32-14.3-32-32V64zm96 64c0-17.7 14.3-32 32-32s32 14.3 32 32v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V128zm-96 88l0-.6c9.4 5.4 20.3 8.6 32 8.6c13.2 0 25.4-4 35.6-10.8c8.7 24.9 32.5 42.8 60.4 42.8c11.7 0 22.6-3.1 32-8.6V256c0 52.3-25.1 98.8-64 128v96c0 17.7-14.3 32-32 32H160c-17.7 0-32-14.3-32-32V401.6c-17.3-7.9-33.2-18.8-46.9-32.5L69.5 357.5C45.5 333.5 32 300.9 32 267V240c0-35.3 28.7-64 64-64h88c22.1 0 40 17.9 40 40s-17.9 40-40 40H128c-8.8 0-16 7.2-16 16s7.2 16 16 16h56c39.8 0 72-32.2 72-72z"],"fa-hand-holding-heart":["0 0 576 512","M148 76.6C148 34.3 182.3 0 224.6 0c20.3 0 39.8 8.1 54.1 22.4l9.3 9.3 9.3-9.3C311.6 8.1 331.1 0 351.4 0C393.7 0 428 34.3 428 76.6c0 20.3-8.1 39.8-22.4 54.1L302.1 234.1c-7.8 7.8-20.5 7.8-28.3 0L170.4 130.7C156.1 116.4 148 96.9 148 76.6zM568.2 336.3c13.1 17.8 9.3 42.8-8.5 55.9L433.1 485.5c-23.4 17.2-51.6 26.5-80.7 26.5H192 32c-17.7 0-32-14.3-32-32V416c0-17.7 14.3-32 32-32H68.8l44.9-36c22.7-18.2 50.9-28 80-28H272h16 64c17.7 0 32 14.3 32 32s-14.3 32-32 32H288 272c-8.8 0-16 7.2-16 16s7.2 16 16 16H392.6l119.7-88.2c17.8-13.1 42.8-9.3 55.9 8.5zM193.6 384l0 0-.9 0c.3 0 .6 0 .9 0z"],"fa-hand-sparkles":["0 0 640 512","M320 0c17.7 0 32 14.3 32 32V240c0 8.8 7.2 16 16 16s16-7.2 16-16V64c0-17.7 14.3-32 32-32s32 14.3 32 32V240c0 8.8 7.2 16 16 16s16-7.2 16-16V128c0-17.7 14.3-32 32-32s32 14.3 32 32V323.1c-11.9 4.8-21.3 14.9-25 27.8l-8.9 31.2L478.9 391C460.6 396.3 448 413 448 432c0 18.9 12.5 35.6 30.6 40.9C448.4 497.4 409.9 512 368 512H348.8c-59.6 0-116.9-22.9-160-64L76.4 341c-16-15.2-16.6-40.6-1.4-56.6s40.6-16.6 56.6-1.4l60.5 57.6c0-1.5-.1-3.1-.1-4.6V64c0-17.7 14.3-32 32-32s32 14.3 32 32V240c0 8.8 7.2 16 16 16s16-7.2 16-16V32c0-17.7 14.3-32 32-32zm-7.3 326.6c-1.1-3.9-4.7-6.6-8.7-6.6s-7.6 2.7-8.7 6.6L288 352l-25.4 7.3c-3.9 1.1-6.6 4.7-6.6 8.7s2.7 7.6 6.6 8.7L288 384l7.3 25.4c1.1 3.9 4.7 6.6 8.7 6.6s7.6-2.7 8.7-6.6L320 384l25.4-7.3c3.9-1.1 6.6-4.7 6.6-8.7s-2.7-7.6-6.6-8.7L320 352l-7.3-25.4zM104 120l48.3 13.8c4.6 1.3 7.7 5.5 7.7 10.2s-3.1 8.9-7.7 10.2L104 168 90.2 216.3c-1.3 4.6-5.5 7.7-10.2 7.7s-8.9-3.1-10.2-7.7L56 168 7.7 154.2C3.1 152.9 0 148.7 0 144s3.1-8.9 7.7-10.2L56 120 69.8 71.7C71.1 67.1 75.3 64 80 64s8.9 3.1 10.2 7.7L104 120zM584 408l48.3 13.8c4.6 1.3 7.7 5.5 7.7 10.2s-3.1 8.9-7.7 10.2L584 456l-13.8 48.3c-1.3 4.6-5.5 7.7-10.2 7.7s-8.9-3.1-10.2-7.7L536 456l-48.3-13.8c-4.6-1.3-7.7-5.5-7.7-10.2s3.1-8.9 7.7-10.2L536 408l13.8-48.3c1.3-4.6 5.5-7.7 10.2-7.7s8.9 3.1 10.2 7.7L584 408z"],"fa-hat-wizard":["0 0 512 512","M64 416L168.6 180.7c15.3-34.4 40.3-63.5 72-83.7l146.9-94c3-1.9 6.5-2.9 10-2.9C407.7 0 416 8.3 416 18.6v1.6c0 2.6-.5 5.1-1.4 7.5L354.8 176.9c-1.9 4.7-2.8 9.7-2.8 14.7c0 5.5 1.2 11 3.4 16.1L448 416H240.9l11.8-35.4 40.4-13.5c6.5-2.2 10.9-8.3 10.9-15.2s-4.4-13-10.9-15.2l-40.4-13.5-13.5-40.4C237 276.4 230.9 272 224 272s-13 4.4-15.2 10.9l-13.5 40.4-40.4 13.5C148.4 339 144 345.1 144 352s4.4 13 10.9 15.2l40.4 13.5L207.1 416H64zM279.6 141.5c-1.1-3.3-4.1-5.5-7.6-5.5s-6.5 2.2-7.6 5.5l-6.7 20.2-20.2 6.7c-3.3 1.1-5.5 4.1-5.5 7.6s2.2 6.5 5.5 7.6l20.2 6.7 6.7 20.2c1.1 3.3 4.1 5.5 7.6 5.5s6.5-2.2 7.6-5.5l6.7-20.2 20.2-6.7c3.3-1.1 5.5-4.1 5.5-7.6s-2.2-6.5-5.5-7.6l-20.2-6.7-6.7-20.2zM32 448H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32z"],"fa-headphones":["0 0 512 512","M256 80C149.9 80 62.4 159.4 49.6 262c9.4-3.8 19.6-6 30.4-6c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48c-44.2 0-80-35.8-80-80V384 336 288C0 146.6 114.6 32 256 32s256 114.6 256 256v48 48 16c0 44.2-35.8 80-80 80c-26.5 0-48-21.5-48-48V304c0-26.5 21.5-48 48-48c10.8 0 21 2.1 30.4 6C449.6 159.4 362.1 80 256 80z"],"fa-heart":["0 0 512 512","M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"],"fa-heart-crack":["0 0 512 512","M119.4 44.1c23.3-3.9 46.8-1.9 68.6 5.3l49.8 77.5-75.4 75.4c-1.5 1.5-2.4 3.6-2.3 5.8s1 4.2 2.6 5.7l112 104c2.9 2.7 7.4 2.9 10.5 .3s3.8-7 1.7-10.4l-60.4-98.1 90.7-75.6c2.6-2.1 3.5-5.7 2.4-8.8L296.8 61.8c28.5-16.7 62.4-23.2 95.7-17.6C461.5 55.6 512 115.2 512 185.1v5.8c0 41.5-17.2 81.2-47.6 109.5L283.7 469.1c-7.5 7-17.4 10.9-27.7 10.9s-20.2-3.9-27.7-10.9L47.6 300.4C17.2 272.1 0 232.4 0 190.9v-5.8c0-69.9 50.5-129.5 119.4-141z"],"fa-hourglass-half":["0 0 384 512","M32 0C14.3 0 0 14.3 0 32S14.3 64 32 64V75c0 42.4 16.9 83.1 46.9 113.1L146.7 256 78.9 323.9C48.9 353.9 32 394.6 32 437v11c-17.7 0-32 14.3-32 32s14.3 32 32 32H64 320h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V437c0-42.4-16.9-83.1-46.9-113.1L237.3 256l67.9-67.9c30-30 46.9-70.7 46.9-113.1V64c17.7 0 32-14.3 32-32s-14.3-32-32-32H320 64 32zM96 75V64H288V75c0 19-5.6 37.4-16 53H112c-10.3-15.6-16-34-16-53zm16 309c3.5-5.3 7.6-10.3 12.1-14.9L192 301.3l67.9 67.9c4.6 4.6 8.6 9.6 12.1 14.9H112z"],"fa-lock":["0 0 448 512","M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"],"fa-map":["0 0 576 512","M384 476.1L192 421.2V35.9L384 90.8V476.1zm32-1.2V88.4L543.1 37.5c15.8-6.3 32.9 5.3 32.9 22.3V394.6c0 9.8-6 18.6-15.1 22.3L416 474.8zM15.1 95.1L160 37.2V423.6L32.9 474.5C17.1 480.8 0 469.2 0 452.2V117.4c0-9.8 6-18.6 15.1-22.3z"],"fa-moon":["0 0 384 512","M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"],"fa-mountain-sun":["0 0 640 512","M560 160A80 80 0 1 0 560 0a80 80 0 1 0 0 160zM55.9 512H381.1h75H578.9c33.8 0 61.1-27.4 61.1-61.1c0-11.2-3.1-22.2-8.9-31.8l-132-216.3C495 196.1 487.8 192 480 192s-15 4.1-19.1 10.7l-48.2 79L286.8 81c-6.6-10.6-18.3-17-30.8-17s-24.1 6.4-30.8 17L8.6 426.4C3 435.3 0 445.6 0 456.1C0 487 25 512 55.9 512z"],"fa-mug-hot":["0 0 512 512","M88 0C74.7 0 64 10.7 64 24c0 38.9 23.4 59.4 39.1 73.1l1.1 1C120.5 112.3 128 119.9 128 136c0 13.3 10.7 24 24 24s24-10.7 24-24c0-38.9-23.4-59.4-39.1-73.1l-1.1-1C119.5 47.7 112 40.1 112 24c0-13.3-10.7-24-24-24zM32 192c-17.7 0-32 14.3-32 32V416c0 53 43 96 96 96H288c53 0 96-43 96-96h16c61.9 0 112-50.1 112-112s-50.1-112-112-112H352 32zm352 64h16c26.5 0 48 21.5 48 48s-21.5 48-48 48H384V256zM224 24c0-13.3-10.7-24-24-24s-24 10.7-24 24c0 38.9 23.4 59.4 39.1 73.1l1.1 1C232.5 112.3 240 119.9 240 136c0 13.3 10.7 24 24 24s24-10.7 24-24c0-38.9-23.4-59.4-39.1-73.1l-1.1-1C231.5 47.7 224 40.1 224 24z"],"fa-music":["0 0 512 512","M499.1 6.3c8.1 6 12.9 15.6 12.9 25.7v72V368c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6V147L192 223.8V432c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6V200 128c0-14.1 9.3-26.6 22.8-30.7l320-96c9.7-2.9 20.2-1.1 28.3 5z"],"fa-paw":["0 0 512 512","M226.5 92.9c14.3 42.9-.3 86.2-32.6 96.8s-70.1-15.6-84.4-58.5s.3-86.2 32.6-96.8s70.1 15.6 84.4 58.5zM100.4 198.6c18.9 32.4 14.3 70.1-10.2 84.1s-59.7-.9-78.5-33.3S-2.7 179.3 21.8 165.3s59.7 .9 78.5 33.3zM69.2 401.2C121.6 259.9 214.7 224 256 224s134.4 35.9 186.8 177.2c3.6 9.7 5.2 20.1 5.2 30.5v1.6c0 25.8-20.9 46.7-46.7 46.7c-11.5 0-22.9-1.4-34-4.2l-88-22c-15.3-3.8-31.3-3.8-46.6 0l-88 22c-11.1 2.8-22.5 4.2-34 4.2C84.9 480 64 459.1 64 433.3v-1.6c0-10.4 1.6-20.8 5.2-30.5zM421.8 282.7c-24.5-14-29.1-51.7-10.2-84.1s54-47.3 78.5-33.3s29.1 51.7 10.2 84.1s-54 47.3-78.5 33.3zM310.1 189.7c-32.3-10.6-46.9-53.9-32.6-96.8s52.1-69.1 84.4-58.5s46.9 53.9 32.6 96.8s-52.1 69.1-84.4 58.5z"],"fa-person-hiking":["0 0 384 512","M192 48a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm51.3 182.7L224.2 307l49.7 49.7c9 9 14.1 21.2 14.1 33.9V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V397.3l-73.9-73.9c-15.8-15.8-22.2-38.6-16.9-60.3l20.4-84c8.3-34.1 42.7-54.9 76.7-46.4c19 4.8 35.6 16.4 46.4 32.7L305.1 208H336V184c0-13.3 10.7-24 24-24s24 10.7 24 24v55.8c0 .1 0 .2 0 .2s0 .2 0 .2V488c0 13.3-10.7 24-24 24s-24-10.7-24-24V272H296.6c-16 0-31-8-39.9-21.4l-13.3-20zM81.1 471.9L117.3 334c3 4.2 6.4 8.2 10.1 11.9l41.9 41.9L142.9 488.1c-4.5 17.1-22 27.3-39.1 22.8s-27.3-22-22.8-39.1zm55.5-346L101.4 266.5c-3 12.1-14.9 19.9-27.2 17.9l-47.9-8c-14-2.3-22.9-16.3-19.2-30L31.9 155c9.5-34.8 41.1-59 77.2-59h4.2c15.6 0 27.1 14.7 23.3 29.8z"],"fa-person-walking":["0 0 320 512","M160 48a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zM126.5 199.3c-1 .4-1.9 .8-2.9 1.2l-8 3.5c-16.4 7.3-29 21.2-34.7 38.2l-2.6 7.8c-5.6 16.8-23.7 25.8-40.5 20.2s-25.8-23.7-20.2-40.5l2.6-7.8c11.4-34.1 36.6-61.9 69.4-76.5l8-3.5c20.8-9.2 43.3-14 66.1-14c44.6 0 84.8 26.8 101.9 67.9L281 232.7l21.4 10.7c15.8 7.9 22.2 27.1 14.3 42.9s-27.1 22.2-42.9 14.3L247 287.3c-10.3-5.2-18.4-13.8-22.8-24.5l-9.6-23-19.3 65.5 49.5 54c5.4 5.9 9.2 13 11.2 20.8l23 92.1c4.3 17.1-6.1 34.5-23.3 38.8s-34.5-6.1-38.8-23.3l-22-88.1-70.7-77.1c-14.8-16.1-20.3-38.6-14.7-59.7l16.9-63.5zM68.7 398l25-62.4c2.1 3 4.5 5.8 7 8.6l40.7 44.4-14.5 36.2c-2.4 6-6 11.5-10.6 16.1L54.6 502.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L68.7 398z"],"fa-plane":["0 0 576 512","M482.3 192c34.2 0 93.7 29 93.7 64c0 36-59.5 64-93.7 64l-116.6 0L265.2 495.9c-5.7 10-16.3 16.1-27.8 16.1l-56.2 0c-10.6 0-18.3-10.2-15.4-20.4l49-171.6L112 320 68.8 377.6c-3 4-7.8 6.4-12.8 6.4l-42 0c-7.8 0-14-6.3-14-14c0-1.3 .2-2.6 .5-3.9L32 256 .5 145.9c-.4-1.3-.5-2.6-.5-3.9c0-7.8 6.3-14 14-14l42 0c5 0 9.8 2.4 12.8 6.4L112 192l102.9 0-49-171.6C162.9 10.2 170.6 0 181.2 0l56.2 0c11.5 0 22.1 6.2 27.8 16.1L365.7 192l116.6 0z"],"fa-plus":["0 0 448 512","M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"],"fa-rotate-left":["0 0 512 512","M48.5 224H40c-13.3 0-24-10.7-24-24V72c0-9.7 5.8-18.5 14.8-22.2s19.3-1.7 26.2 5.2L98.6 96.6c87.6-86.5 228.7-86.2 315.8 1c87.5 87.5 87.5 229.3 0 316.8s-229.3 87.5-316.8 0c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0c62.5 62.5 163.8 62.5 226.3 0s62.5-163.8 0-226.3c-62.2-62.2-162.7-62.5-225.3-1L185 183c6.9 6.9 8.9 17.2 5.2 26.2s-12.5 14.8-22.2 14.8H48.5z"],"fa-scroll":["0 0 576 512","M0 80v48c0 17.7 14.3 32 32 32H48 96V80c0-26.5-21.5-48-48-48S0 53.5 0 80zM112 32c10 13.4 16 30 16 48V384c0 35.3 28.7 64 64 64s64-28.7 64-64v-5.3c0-32.4 26.3-58.7 58.7-58.7H480V128c0-53-43-96-96-96H112zM464 480c61.9 0 112-50.1 112-112c0-8.8-7.2-16-16-16H314.7c-14.7 0-26.7 11.9-26.7 26.7V384c0 53-43 96-96 96H368h96z"],"fa-seedling":["0 0 512 512","M512 32c0 113.6-84.6 207.5-194.2 222c-7.1-53.4-30.6-101.6-65.3-139.3C290.8 46.3 364 0 448 0h32c17.7 0 32 14.3 32 32zM0 96C0 78.3 14.3 64 32 64H64c123.7 0 224 100.3 224 224v32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V320C100.3 320 0 219.7 0 96z"],"fa-shield-halved":["0 0 512 512","M256 0c4.6 0 9.2 1 13.4 2.9L457.7 82.8c22 9.3 38.4 31 38.3 57.2c-.5 99.2-41.3 280.7-213.6 363.2c-16.7 8-36.1 8-52.8 0C57.3 420.7 16.5 239.2 16 140c-.1-26.2 16.3-47.9 38.3-57.2L242.7 2.9C246.8 1 251.4 0 256 0zm0 66.8V444.8C394 378 431.1 230.1 432 141.4L256 66.8l0 0z"],"fa-skull":["0 0 512 512","M416 398.9c58.5-41.1 96-104.1 96-174.9C512 100.3 397.4 0 256 0S0 100.3 0 224c0 70.7 37.5 133.8 96 174.9c0 .4 0 .7 0 1.1v64c0 26.5 21.5 48 48 48h48V464c0-8.8 7.2-16 16-16s16 7.2 16 16v48h64V464c0-8.8 7.2-16 16-16s16 7.2 16 16v48h48c26.5 0 48-21.5 48-48V400c0-.4 0-.7 0-1.1zM96 256a64 64 0 1 1 128 0A64 64 0 1 1 96 256zm256-64a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"],"fa-spa":["0 0 576 512","M183.1 235.3c33.7 20.7 62.9 48.1 85.8 80.5c7 9.9 13.4 20.3 19.1 31c5.7-10.8 12.1-21.1 19.1-31c22.9-32.4 52.1-59.8 85.8-80.5C437.6 207.8 490.1 192 546 192h9.9c11.1 0 20.1 9 20.1 20.1C576 360.1 456.1 480 308.1 480H288 267.9C119.9 480 0 360.1 0 212.1C0 201 9 192 20.1 192H30c55.9 0 108.4 15.8 153.1 43.3zM301.5 37.6c15.7 16.9 61.1 71.8 84.4 164.6c-38 21.6-71.4 50.8-97.9 85.6c-26.5-34.8-59.9-63.9-97.9-85.6c23.2-92.8 68.6-147.7 84.4-164.6C278 33.9 282.9 32 288 32s10 1.9 13.5 5.6z"],"fa-star":["0 0 576 512","M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"],"fa-trash-can":["0 0 448 512","M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"],"fa-tree":["0 0 448 512","M210.6 5.9L62 169.4c-3.9 4.2-6 9.8-6 15.5C56 197.7 66.3 208 79.1 208H104L30.6 281.4c-4.2 4.2-6.6 10-6.6 16C24 309.9 34.1 320 46.6 320H80L5.4 409.5C1.9 413.7 0 419 0 424.5c0 13 10.5 23.5 23.5 23.5H192v32c0 17.7 14.3 32 32 32s32-14.3 32-32V448H424.5c13 0 23.5-10.5 23.5-23.5c0-5.5-1.9-10.8-5.4-15L368 320h33.4c12.5 0 22.6-10.1 22.6-22.6c0-6-2.4-11.8-6.6-16L344 208h24.9c12.7 0 23.1-10.3 23.1-23.1c0-5.7-2.1-11.3-6-15.5L237.4 5.9C234 2.1 229.1 0 224 0s-10 2.1-13.4 5.9z"],"fa-user-shield":["0 0 640 512","M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c1.8 0 3.5-.2 5.3-.5c-76.3-55.1-99.8-141-103.1-200.2c-16.1-4.8-33.1-7.3-50.7-7.3H178.3zm308.8-78.3l-120 48C358 277.4 352 286.2 352 296c0 63.3 25.9 168.8 134.8 214.2c5.9 2.5 12.6 2.5 18.5 0C614.1 464.8 640 359.3 640 296c0-9.8-6-18.6-15.1-22.3l-120-48c-5.7-2.3-12.1-2.3-17.8 0zM591.4 312c-3.9 50.7-27.2 116.7-95.4 149.7V273.8L591.4 312z"],"fa-utensils":["0 0 448 512","M416 0C400 0 288 32 288 176V288c0 35.3 28.7 64 64 64h32V480c0 17.7 14.3 32 32 32s32-14.3 32-32V352 240 32c0-17.7-14.3-32-32-32zM64 16C64 7.8 57.9 1 49.7 .1S34.2 4.6 32.4 12.5L2.1 148.8C.7 155.1 0 161.5 0 167.9c0 45.9 35.1 83.6 80 87.7V480c0 17.7 14.3 32 32 32s32-14.3 32-32V255.6c44.9-4.1 80-41.8 80-87.7c0-6.4-.7-12.8-2.1-19.1L191.6 12.5c-1.8-8-9.3-13.3-17.4-12.4S160 7.8 160 16V150.2c0 5.4-4.4 9.8-9.8 9.8c-5.1 0-9.3-3.9-9.8-9L127.9 14.6C127.2 6.3 120.3 0 112 0s-15.2 6.3-15.9 14.6L83.7 151c-.5 5.1-4.7 9-9.8 9c-5.4 0-9.8-4.4-9.8-9.8V16zm48.3 152l-.3 0-.3 0 .3-.7 .3 .7z"],"fa-wand-sparkles":["0 0 512 512","M464 6.1c9.5-8.5 24-8.1 33 .9l8 8c9 9 9.4 23.5 .9 33l-85.8 95.9c-2.6 2.9-4.1 6.7-4.1 10.7V176c0 8.8-7.2 16-16 16H384.2c-4.6 0-8.9 1.9-11.9 5.3L100.7 500.9C94.3 508 85.3 512 75.8 512c-8.8 0-17.3-3.5-23.5-9.8L9.7 459.7C3.5 453.4 0 445 0 436.2c0-9.5 4-18.5 11.1-24.8l111.6-99.8c3.4-3 5.3-7.4 5.3-11.9V272c0-8.8 7.2-16 16-16h34.6c3.9 0 7.7-1.5 10.7-4.1L464 6.1zM432 288c3.6 0 6.7 2.4 7.7 5.8l14.8 51.7 51.7 14.8c3.4 1 5.8 4.1 5.8 7.7s-2.4 6.7-5.8 7.7l-51.7 14.8-14.8 51.7c-1 3.4-4.1 5.8-7.7 5.8s-6.7-2.4-7.7-5.8l-14.8-51.7-51.7-14.8c-3.4-1-5.8-4.1-5.8-7.7s2.4-6.7 5.8-7.7l51.7-14.8 14.8-51.7c1-3.4 4.1-5.8 7.7-5.8zM87.7 69.8l14.8 51.7 51.7 14.8c3.4 1 5.8 4.1 5.8 7.7s-2.4 6.7-5.8 7.7l-51.7 14.8L87.7 218.2c-1 3.4-4.1 5.8-7.7 5.8s-6.7-2.4-7.7-5.8L57.5 166.5 5.8 151.7c-3.4-1-5.8-4.1-5.8-7.7s2.4-6.7 5.8-7.7l51.7-14.8L72.3 69.8c1-3.4 4.1-5.8 7.7-5.8s6.7 2.4 7.7 5.8zM208 0c3.7 0 6.9 2.5 7.8 6.1l6.8 27.3 27.3 6.8c3.6 .9 6.1 4.1 6.1 7.8s-2.5 6.9-6.1 7.8l-27.3 6.8-6.8 27.3c-.9 3.6-4.1 6.1-7.8 6.1s-6.9-2.5-7.8-6.1l-6.8-27.3-27.3-6.8c-3.6-.9-6.1-4.1-6.1-7.8s2.5-6.9 6.1-7.8l27.3-6.8 6.8-27.3c.9-3.6 4.1-6.1 7.8-6.1z"],"fa-whatsapp":["0 0 448 512","M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"]};
 function icono(nombre){
   const d = ICONOS[nombre]; if(!d) return "";
   return `<svg class="ic" viewBox="${d[0]}" aria-hidden="true" focusable="false"><path d="${d[1]}"/></svg>`;
@@ -2486,38 +2663,73 @@ function cartaHTML(m, jefe, ec){
     <span class="cm-pie"><b>+${m.xp} XP</b><small>${pie}</small></span>${sello}`;
 }
 
+// las cartas forjadas sin fase (de versiones anteriores) se ubican según su XP
+const faseDeXP = xp => xp >= XP_JEFE ? "III" : xp >= 75 ? "II" : "I";
+const SUGERIDO = { I:[20,50], II:[75,150], III:[250,500] };
 function fasesVisibles(){
-  const fases = FASES.slice();
-  if(estado.misionesExtra.length) fases.push({
-    num:"IV", nombre:"Desafíos forjados", rango:"A su medida", forjada:true,
-    desc:"Las cartas que ustedes mismos agregaron al mazo.",
-    misiones:estado.misionesExtra
-  });
-  return fases;
+  return FASES.map(f => Object.assign({}, f, {
+    misiones:[...f.misiones, ...estado.misionesExtra.filter(m => (m.fase || faseDeXP(m.xp)) === f.num)]
+  }));
 }
+const POR_PAGINA = 4;
+const paginaFase = { I:0, II:0, III:0 };
 
-function renderMazo(){
+function renderMazo(animar){
   const cont = $("fases"); cont.innerHTML = "";
   fasesVisibles().forEach(f => {
     const div = document.createElement("div");
     div.className = "fase";
-    div.innerHTML = `<div class="fase-cab"><h3>Fase ${f.num}: ${esc(f.nombre)}</h3><span class="rango">${f.rango}</span></div>
-      <p class="fase-desc">${esc(f.desc)}</p><div class="mazo"></div>`;
+    const total = f.misiones.length + 1;   // +1: el hueco para agregar
+    const paginas = Math.max(1, Math.ceil(total / POR_PAGINA));
+    const pag = paginaFase[f.num] = Math.min(paginaFase[f.num], paginas - 1);
+    div.innerHTML = `<div class="fase-cab"><h3>Fase ${f.num}: ${esc(f.nombre)}</h3>
+        <span class="fase-der"><span class="rango">${f.rango}</span><button class="btn-nueva" type="button">${icono("fa-plus")} Nueva carta</button></span></div>
+      <p class="fase-desc">${esc(f.desc)}</p>
+      <div class="mazo${animar && animar.fase === f.num ? " entra-" + animar.dir : ""}"></div>
+      <div class="paginador"${paginas < 2 ? " hidden" : ""}>
+        <button class="flecha" type="button" data-d="-1" aria-label="Cartas anteriores de la fase ${f.num}"${pag === 0 ? " disabled" : ""}>${icono("fa-chevron-left")}</button>
+        <span class="pagina-n">${pag + 1} / ${paginas}</span>
+        <button class="flecha" type="button" data-d="1" aria-label="Más cartas de la fase ${f.num}"${pag >= paginas - 1 ? " disabled" : ""}>${icono("fa-chevron-right")}</button>
+      </div>`;
+    div.querySelector(".btn-nueva").addEventListener("click", () => abrirForja(f));
+    div.querySelectorAll(".flecha").forEach(b => b.addEventListener("click", () => moverPagina(f.num, +b.dataset.d, paginas)));
     const mazo = div.querySelector(".mazo");
-    f.misiones.forEach(m => {
-      const jefe = f.jefe || (f.forjada && m.xp >= XP_JEFE);
+    // deslizar con el dedo
+    let x0 = null;
+    mazo.addEventListener("touchstart", e => { x0 = e.touches[0].clientX; }, { passive:true });
+    mazo.addEventListener("touchend", e => {
+      if(x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0; x0 = null;
+      if(Math.abs(dx) > 50) moverPagina(f.num, dx < 0 ? 1 : -1, paginas);
+    }, { passive:true });
+    const visibles = f.misiones.slice(pag * POR_PAGINA, pag * POR_PAGINA + POR_PAGINA);
+    visibles.forEach(m => {
+      const jefe = !!f.jefe;
       const b = document.createElement("button");
       b.className = "carta-mision" + (jefe ? " jefe" : "") + (m.id ? " forjada" : "");
       const ec = estadoCarta(m, f.num === "I");
       if(ec.cumplida) b.classList.add("cumplida");
       b.innerHTML = cartaHTML(m, jefe, ec);
-      if(ec.cumplida) b.setAttribute("aria-label", `${m.nombre}, ya ${jefe ? "derrotado" : "cumplida"}. ${ec.vuelve}`);
-      b.setAttribute("aria-label", `${m.nombre}, ${m.xp} XP. Ver misión`);
+      b.setAttribute("aria-label", ec.cumplida ? `${m.nombre}, ya ${jefe ? "derrotado" : "cumplida"}. ${ec.vuelve}` : `${m.nombre}, ${m.xp} XP. Ver misión`);
       b.addEventListener("click", () => abrirMision(m, f, jefe));
       mazo.appendChild(b);
     });
+    if(visibles.length < POR_PAGINA){
+      const v = document.createElement("button");
+      v.type = "button"; v.className = "carta-vacia";
+      v.innerHTML = `<span>${icono("fa-plus")}Nueva carta</span>`;
+      v.setAttribute("aria-label", `Agregar una carta nueva a la fase ${f.num}`);
+      v.addEventListener("click", () => abrirForja(f));
+      mazo.appendChild(v);
+    }
     cont.appendChild(div);
   });
+}
+function moverPagina(num, d, paginas){
+  const n = paginaFase[num] + d;
+  if(n < 0 || n >= paginas) return;
+  paginaFase[num] = n;
+  renderMazo({ fase:num, dir: d > 0 ? "der" : "izq" });
 }
 
 let misionActual = null, confirmaRetiro = false;
@@ -2568,16 +2780,33 @@ ICONOS_FORJA.forEach((ic, i) => {
   });
   $("fm-iconos").appendChild(b);
 });
+let faseForja = "I";
+function abrirForja(f){
+  faseForja = f.num;
+  const [min, max] = SUGERIDO[f.num];
+  $("mf-titulo").textContent = f.jefe ? "Nuevo jefe" : "Nueva carta";
+  $("mf-fase").textContent = `Fase ${f.num}: ${f.nombre}. ${f.desc}`;
+  $("mf-sugerido").textContent = `(sugerido: ${min} a ${max})`;
+  $("fm-xp").value = min;
+  $("fm-nombre").value = ""; $("fm-desc").value = "";
+  $("modal-forja").classList.add("abierto");
+  setTimeout(() => $("fm-nombre").focus(), 50);
+}
+function cerrarForja(){ $("modal-forja").classList.remove("abierto"); }
+$("fm-cerrar").addEventListener("click", cerrarForja);
+$("modal-forja").addEventListener("click", e => { if(e.target.id === "modal-forja") cerrarForja(); });
 $("fm-crear").addEventListener("click", () => {
   const nombre = $("fm-nombre").value.trim();
   const xp = parseInt($("fm-xp").value, 10);
   if(!nombre){ toast("Pónganle un nombre a la carta"); $("fm-nombre").focus(); return; }
   if(isNaN(xp) || xp < 1){ toast("Escriban cuánta XP vale"); $("fm-xp").focus(); return; }
-  estado.misionesExtra.push({ id:uid(), nombre, xp, desc:$("fm-desc").value.trim(), icono:iconoElegido });
-  guardar(); renderMazo();
-  $("fm-nombre").value = ""; $("fm-xp").value = ""; $("fm-desc").value = "";
-  $("forja-mision").open = false;
-  toast("¡Carta forjada! Ya está en el mazo");
+  estado.misionesExtra.push({ id:uid(), nombre, xp, desc:$("fm-desc").value.trim(), icono:iconoElegido, fase:faseForja });
+  guardar();
+  const f = fasesVisibles().find(x => x.num === faseForja);
+  paginaFase[faseForja] = Math.floor((f.misiones.length - 1) / POR_PAGINA);   // ir a la página de la carta nueva
+  renderMazo({ fase:faseForja, dir:"der" });
+  cerrarForja();
+  toast(`¡Carta forjada en la Fase ${faseForja}!`);
 });
 
 // ===== Forja de recompensas =====
@@ -2649,10 +2878,11 @@ function renderCartas(){
     const b = document.createElement("button");
     b.className = "carta-mini " + tipo;
     b.disabled = !abierta;
-    b.innerHTML = `<div class="img"><span class="sello">${
+    const frente = abierta ? `<span class="frente"><small>Nivel ${r.nivel}</small><b>${esc(r.titulo)}</b><span>${esc(r.desc)}</span></span>` : "";
+    b.innerHTML = `<div class="img"><div class="cara-mini">${frente}</div><span class="sello">${
         tipo === "bloqueada" ? icono("fa-lock") + ' ' + xpDeNivel(r.nivel).toLocaleString("es-AR") + ' XP'
         : tipo === "canjeada" ? icono("fa-check") + ' Canjeada'
-        : 'Toca para ver'}</span></div>
+        : 'Toca para canjear'}</span></div>
       <span class="t"></span><span class="s"></span>`;
     b.querySelector(".t").textContent = abierta ? r.titulo : "Carta sellada";
     b.querySelector(".s").textContent = "Nivel " + r.nivel;
@@ -2778,7 +3008,7 @@ $("btn-reiniciar").addEventListener("click", () => {
 document.addEventListener("keydown", e => {
   if(e.key !== "Escape") return;
   if($("modal-carta").classList.contains("abierto")) cerrarCarta();
-  cerrarMision(); cerrarReglas();
+  cerrarMision(); cerrarReglas(); cerrarForja();
   $("modal-ajustes").classList.remove("abierto");
 });
 
@@ -2789,16 +3019,6 @@ function toast(msg){
   clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("visible"), 2400);
 }
 
-// ===== Misión libre =====
-function sumarPersonalizada(){
-  const nombre = $("mision-nombre").value.trim() || "Misión libre";
-  const xp = parseInt($("mision-xp").value, 10);
-  if(isNaN(xp) || xp < 1){ toast("Escriban cuánta XP vale la misión"); $("mision-xp").focus(); return; }
-  sumarXP(nombre, xp, xp >= XP_JEFE);
-  $("mision-nombre").value = ""; $("mision-xp").value = "";
-}
-$("btn-sumar").addEventListener("click", sumarPersonalizada);
-["mision-nombre","mision-xp"].forEach(id => $(id).addEventListener("keydown", e => { if(e.key === "Enter") sumarPersonalizada(); }));
 $("btn-deshacer").addEventListener("click", deshacer);
 
 // ===== Luciérnagas =====
@@ -2958,13 +3178,22 @@ function abrirPocion(p){
 function cerrarPocion(){ $("modal-pocion").classList.remove("abierto"); }
 
 // ----- runas caídas
+const PIXEL = {"te":["<svg viewBox=\"0 0 13 13\" width=\"52\" height=\"52\"><path fill=\"#d8d3e6\" d=\"M3 0h1v1h-1zM7 0h1v1h-1zM4 1h1v1h-1zM8 1h1v1h-1zM3 2h1v1h-1zM7 2h1v1h-1zM4 3h1v1h-1zM8 3h1v1h-1z\"/><path fill=\"#1a0f1f\" d=\"M2 4h9v1h-9zM2 5h1v1h-1zM10 5h3v1h-3zM2 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM2 7h1v1h-1zM10 7h1v1h-1zM12 7h1v1h-1zM2 8h1v1h-1zM10 8h3v1h-3zM3 9h1v1h-1zM9 9h1v1h-1zM2 10h9v1h-9zM1 11h1v1h-1zM11 11h1v1h-1zM2 12h9v1h-9z\"/><path fill=\"#efe4cf\" d=\"M3 5h7v1h-7zM3 6h1v1h-1zM9 6h1v1h-1zM3 7h1v1h-1zM9 7h1v1h-1zM3 8h1v1h-1zM5 8h5v1h-5zM4 9h1v1h-1zM6 9h3v1h-3z\"/><path fill=\"#b5652e\" d=\"M4 6h5v1h-5zM4 7h5v1h-5z\"/><path fill=\"#c9b89a\" d=\"M4 8h1v1h-1zM5 9h1v1h-1z\"/><path fill=\"#c98a66\" d=\"M2 11h9v1h-9z\"/></svg>","<svg viewBox=\"0 0 13 13\" width=\"52\" height=\"52\"><path fill=\"#d8d3e6\" d=\"M4 0h1v1h-1zM8 0h1v1h-1zM3 1h1v1h-1zM7 1h1v1h-1zM4 2h1v1h-1zM8 2h1v1h-1zM3 3h1v1h-1zM7 3h1v1h-1z\"/><path fill=\"#1a0f1f\" d=\"M2 4h9v1h-9zM2 5h1v1h-1zM10 5h3v1h-3zM2 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM2 7h1v1h-1zM10 7h1v1h-1zM12 7h1v1h-1zM2 8h1v1h-1zM10 8h3v1h-3zM3 9h1v1h-1zM9 9h1v1h-1zM2 10h9v1h-9zM1 11h1v1h-1zM11 11h1v1h-1zM2 12h9v1h-9z\"/><path fill=\"#efe4cf\" d=\"M3 5h7v1h-7zM3 6h1v1h-1zM9 6h1v1h-1zM3 7h1v1h-1zM9 7h1v1h-1zM3 8h1v1h-1zM5 8h5v1h-5zM4 9h1v1h-1zM6 9h3v1h-3z\"/><path fill=\"#b5652e\" d=\"M4 6h5v1h-5zM4 7h5v1h-5z\"/><path fill=\"#c9b89a\" d=\"M4 8h1v1h-1zM5 9h1v1h-1z\"/><path fill=\"#c98a66\" d=\"M2 11h9v1h-9z\"/></svg>"],"nota":"<svg viewBox=\"0 0 16 11\" width=\"64\" height=\"44\"><path fill=\"#1a0f1f\" d=\"M0 0h16v1h-16zM0 1h1v1h-1zM2 1h1v1h-1zM13 1h1v1h-1zM15 1h1v1h-1zM0 2h1v1h-1zM3 2h1v1h-1zM12 2h1v1h-1zM15 2h1v1h-1zM0 3h1v1h-1zM4 3h1v1h-1zM11 3h1v1h-1zM15 3h1v1h-1zM0 4h1v1h-1zM5 4h1v1h-1zM10 4h1v1h-1zM15 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM9 5h1v1h-1zM15 5h1v1h-1zM0 6h1v1h-1zM15 6h1v1h-1zM0 7h1v1h-1zM15 7h1v1h-1zM0 8h1v1h-1zM15 8h1v1h-1zM0 9h1v1h-1zM15 9h1v1h-1zM0 10h16v1h-16z\"/><path fill=\"#efe4cf\" d=\"M1 1h1v1h-1zM3 1h10v1h-10zM14 1h1v1h-1zM1 2h2v1h-2zM4 2h8v1h-8zM13 2h2v1h-2zM1 3h3v1h-3zM5 3h6v1h-6zM12 3h3v1h-3zM1 4h4v1h-4zM6 4h4v1h-4zM11 4h4v1h-4zM1 5h5v1h-5zM10 5h5v1h-5zM1 6h5v1h-5zM10 6h5v1h-5zM1 7h6v1h-6zM9 7h6v1h-6zM1 8h14v1h-14z\"/><path fill=\"#a46ee8\" d=\"M7 5h2v1h-2zM6 6h4v1h-4zM7 7h2v1h-2z\"/><path fill=\"#bfae94\" d=\"M1 9h14v1h-14z\"/></svg>","mano":"<svg viewBox=\"0 0 14 13\" width=\"56\" height=\"52\"><path fill=\"#1a0f1f\" d=\"M3 0h1v1h-1zM5 0h1v1h-1zM7 0h1v1h-1zM2 1h1v1h-1zM4 1h1v1h-1zM6 1h1v1h-1zM8 1h1v1h-1zM2 2h1v1h-1zM4 2h1v1h-1zM6 2h1v1h-1zM8 2h2v1h-2zM2 3h1v1h-1zM4 3h1v1h-1zM6 3h1v1h-1zM8 3h1v1h-1zM10 3h1v1h-1zM2 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM8 4h1v1h-1zM10 4h1v1h-1zM1 5h2v1h-2zM10 5h1v1h-1zM0 6h1v1h-1zM2 6h1v1h-1zM10 6h1v1h-1zM0 7h1v1h-1zM3 7h1v1h-1zM10 7h1v1h-1zM1 8h1v1h-1zM10 8h1v1h-1zM2 9h1v1h-1zM9 9h1v1h-1zM3 10h1v1h-1zM9 10h1v1h-1zM4 11h1v1h-1zM8 11h1v1h-1zM4 12h5v1h-5z\"/><path fill=\"#e0b095\" d=\"M3 1h1v1h-1zM5 1h1v1h-1zM7 1h1v1h-1zM3 2h1v1h-1zM5 2h1v1h-1zM7 2h1v1h-1zM3 3h1v1h-1zM5 3h1v1h-1zM7 3h1v1h-1zM9 3h1v1h-1zM3 4h1v1h-1zM5 4h1v1h-1zM7 4h1v1h-1zM9 4h1v1h-1zM3 5h7v1h-7zM1 6h1v1h-1zM3 6h7v1h-7zM1 7h2v1h-2zM4 7h5v1h-5zM2 8h7v1h-7zM3 9h6v1h-6zM4 10h4v1h-4zM5 11h3v1h-3z\"/><path fill=\"#b8876a\" d=\"M9 7h1v1h-1zM9 8h1v1h-1zM8 10h1v1h-1z\"/></svg>","huella":"<svg viewBox=\"0 0 5 7\" width=\"15\" height=\"21\"><path fill=\"#1a0f1f\" d=\"M1 0h2v1h-2zM0 1h1v1h-1zM3 1h1v1h-1zM0 2h1v1h-1zM4 2h1v1h-1zM0 3h1v1h-1zM4 3h1v1h-1zM1 4h1v1h-1zM3 4h1v1h-1zM1 5h1v1h-1zM3 5h1v1h-1zM2 6h1v1h-1z\"/><path fill=\"#c98a66\" d=\"M1 1h2v1h-2zM1 2h3v1h-3zM1 3h3v1h-3zM2 4h1v1h-1zM2 5h1v1h-1z\"/></svg>","pregunta":"<svg viewBox=\"0 0 9 14\" width=\"36\" height=\"56\"><path fill=\"#1a0f1f\" d=\"M2 0h5v1h-5zM1 1h1v1h-1zM7 1h1v1h-1zM0 2h1v1h-1zM3 2h3v1h-3zM8 2h1v1h-1zM0 3h1v1h-1zM2 3h1v1h-1zM6 3h1v1h-1zM8 3h1v1h-1zM0 4h3v1h-3zM6 4h1v1h-1zM8 4h1v1h-1zM4 5h2v1h-2zM8 5h1v1h-1zM3 6h1v1h-1zM7 6h1v1h-1zM3 7h1v1h-1zM5 7h2v1h-2zM3 8h1v1h-1zM5 8h1v1h-1zM3 9h3v1h-3zM3 11h3v1h-3zM3 12h1v1h-1zM5 12h1v1h-1zM3 13h3v1h-3z\"/><path fill=\"#c99bff\" d=\"M2 1h5v1h-5zM1 2h2v1h-2zM6 2h2v1h-2zM1 3h1v1h-1zM7 3h1v1h-1zM7 4h1v1h-1zM6 5h2v1h-2zM4 6h3v1h-3zM4 7h1v1h-1zM4 8h1v1h-1zM4 12h1v1h-1z\"/></svg>","espada":"<svg viewBox=\"0 0 9 17\" width=\"45\" height=\"85\"><path fill=\"#1a0f1f\" d=\"M3 0h3v1h-3zM3 1h1v1h-1zM5 1h1v1h-1zM3 2h3v1h-3zM3 3h1v1h-1zM5 3h1v1h-1zM3 4h1v1h-1zM5 4h1v1h-1zM0 5h9v1h-9zM0 6h1v1h-1zM8 6h1v1h-1zM0 7h9v1h-9zM3 8h1v1h-1zM6 8h1v1h-1zM3 9h1v1h-1zM6 9h1v1h-1zM3 10h1v1h-1zM6 10h1v1h-1zM3 11h1v1h-1zM6 11h1v1h-1zM3 12h1v1h-1zM6 12h1v1h-1zM3 13h1v1h-1zM6 13h1v1h-1zM3 14h1v1h-1zM6 14h1v1h-1zM3 15h1v1h-1zM6 15h1v1h-1zM4 16h2v1h-2z\"/><path fill=\"#a46ee8\" d=\"M4 1h1v1h-1zM5 6h1v1h-1z\"/><path fill=\"#6e4433\" d=\"M4 3h1v1h-1zM4 4h1v1h-1z\"/><path fill=\"#c98a66\" d=\"M1 6h4v1h-4zM6 6h2v1h-2z\"/><path fill=\"#e9e1ee\" d=\"M4 8h1v1h-1zM4 9h1v1h-1zM4 10h1v1h-1zM4 11h1v1h-1zM4 12h1v1h-1zM4 13h1v1h-1zM4 14h1v1h-1zM4 15h1v1h-1z\"/><path fill=\"#9a8fa8\" d=\"M5 8h1v1h-1zM5 9h1v1h-1zM5 10h1v1h-1zM5 11h1v1h-1zM5 12h1v1h-1zM5 13h1v1h-1zM5 14h1v1h-1zM5 15h1v1h-1z\"/></svg>","mancha":"<svg viewBox=\"0 0 22 8\" width=\"110\" height=\"40\"><path fill=\"#1a0f1f\" d=\"M6 0h7v1h-7zM3 1h3v1h-3zM13 1h3v1h-3zM1 2h2v1h-2zM16 2h2v1h-2zM0 3h1v1h-1zM18 3h1v1h-1zM0 4h1v1h-1zM18 4h1v1h-1zM20 4h2v1h-2zM1 5h2v1h-2zM16 5h2v1h-2zM19 5h1v1h-1zM21 5h1v1h-1zM3 6h3v1h-3zM13 6h3v1h-3zM19 6h2v1h-2zM6 7h7v1h-7z\"/><path fill=\"#8a1a14\" d=\"M6 1h7v1h-7zM3 2h3v1h-3zM11 2h5v1h-5zM1 3h3v1h-3zM14 3h4v1h-4zM1 4h2v1h-2zM15 4h3v1h-3zM3 5h3v1h-3zM13 5h3v1h-3zM20 5h1v1h-1zM6 6h7v1h-7z\"/><path fill=\"#d2463a\" d=\"M6 2h5v1h-5zM4 3h4v1h-4zM10 3h4v1h-4zM3 4h3v1h-3zM11 4h4v1h-4zM6 5h7v1h-7z\"/><path fill=\"#ff8a6a\" d=\"M8 3h2v1h-2zM6 4h5v1h-5z\"/></svg>","abrazo":"<svg viewBox=\"0 0 28 29\" width=\"84\" height=\"87\"><path fill=\"#1a0f1f\" d=\"M15 0h7v1h-7zM14 1h1v1h-1zM22 1h1v1h-1zM13 2h1v1h-1zM23 2h1v1h-1zM13 3h1v1h-1zM23 3h1v1h-1zM13 4h1v1h-1zM23 4h1v1h-1zM7 5h5v1h-5zM13 5h1v1h-1zM23 5h1v1h-1zM6 6h1v1h-1zM12 6h2v1h-2zM24 6h1v1h-1zM5 7h1v1h-1zM13 7h1v1h-1zM23 7h1v1h-1zM4 8h1v1h-1zM14 8h1v1h-1zM23 8h1v1h-1zM4 9h1v1h-1zM14 9h1v1h-1zM23 9h1v1h-1zM4 10h1v1h-1zM14 10h1v1h-1zM23 10h1v1h-1zM4 11h1v1h-1zM14 11h1v1h-1zM16 11h1v1h-1zM20 11h1v1h-1zM24 11h1v1h-1zM4 12h1v1h-1zM14 12h1v1h-1zM24 12h1v1h-1zM4 13h1v1h-1zM7 13h1v1h-1zM11 13h1v1h-1zM15 13h1v1h-1zM24 13h1v1h-1zM4 14h1v1h-1zM7 14h1v1h-1zM11 14h2v1h-2zM15 14h1v1h-1zM24 14h1v1h-1zM2 15h1v1h-1zM4 15h1v1h-1zM16 15h1v1h-1zM24 15h1v1h-1zM2 16h1v1h-1zM14 16h1v1h-1zM16 16h1v1h-1zM25 16h1v1h-1zM3 17h3v1h-3zM14 17h2v1h-2zM25 17h1v1h-1zM3 18h1v1h-1zM15 18h1v1h-1zM25 18h1v1h-1zM3 19h1v1h-1zM14 19h1v1h-1zM25 19h1v1h-1zM3 20h1v1h-1zM15 20h1v1h-1zM25 20h1v1h-1zM2 21h1v1h-1zM15 21h1v1h-1zM24 21h1v1h-1zM2 22h1v1h-1zM15 22h1v1h-1zM24 22h1v1h-1zM2 23h1v1h-1zM15 23h1v1h-1zM24 23h1v1h-1zM1 24h1v1h-1zM15 24h1v1h-1zM24 24h1v1h-1zM1 25h1v1h-1zM15 25h10v1h-10zM1 26h1v1h-1zM16 26h1v1h-1zM19 26h1v1h-1zM22 26h1v1h-1zM1 27h16v1h-16zM19 27h1v1h-1zM22 27h1v1h-1zM5 28h1v1h-1zM7 28h1v1h-1zM11 28h1v1h-1zM13 28h4v1h-4zM18 28h5v1h-5z\"/><path fill=\"#2b1a1c\" d=\"M15 1h7v1h-7zM14 2h1v1h-1zM17 2h6v1h-6zM14 3h9v1h-9zM14 4h1v1h-1zM22 4h1v1h-1zM14 5h1v1h-1zM22 5h1v1h-1zM7 6h5v1h-5zM14 6h1v1h-1zM23 6h1v1h-1zM6 7h1v1h-1zM9 7h4v1h-4zM14 7h1v1h-1zM22 7h1v1h-1zM5 8h9v1h-9zM22 8h1v1h-1zM5 9h1v1h-1zM13 9h1v1h-1zM22 9h1v1h-1zM5 10h1v1h-1zM13 10h1v1h-1zM15 10h1v1h-1zM21 10h2v1h-2zM5 11h1v1h-1zM13 11h1v1h-1zM15 11h1v1h-1zM21 11h3v1h-3zM5 12h2v1h-2zM12 12h2v1h-2zM22 12h2v1h-2zM5 13h2v1h-2zM12 13h3v1h-3zM5 14h2v1h-2zM13 14h2v1h-2zM14 15h2v1h-2zM15 16h1v1h-1z\"/><path fill=\"#4d3029\" d=\"M15 2h2v1h-2zM7 7h2v1h-2z\"/><path fill=\"#e0b095\" d=\"M15 4h7v1h-7zM15 5h7v1h-7zM15 7h7v1h-7zM16 8h5v1h-5zM4 16h1v1h-1zM21 19h1v1h-1zM21 20h1v1h-1z\"/><path fill=\"#0d0a10\" d=\"M15 6h1v1h-1zM17 6h4v1h-4zM22 6h1v1h-1z\"/><path fill=\"#9fb4d8\" d=\"M16 6h1v1h-1zM21 6h1v1h-1zM3 10h1v1h-1z\"/><path fill=\"#3b2621\" d=\"M15 8h1v1h-1zM21 8h1v1h-1zM15 9h3v1h-3zM19 9h3v1h-3zM16 10h5v1h-5zM17 11h3v1h-3z\"/><path fill=\"#cfc8dc\" d=\"M2 9h2v1h-2zM2 10h1v1h-1zM2 11h2v1h-2z\"/><path fill=\"#c48a68\" d=\"M6 9h7v1h-7zM6 10h1v1h-1zM8 10h3v1h-3zM12 10h1v1h-1zM6 11h3v1h-3zM10 11h3v1h-3zM2 12h2v1h-2zM7 12h5v1h-5zM3 13h1v1h-1zM8 13h3v1h-3z\"/><path fill=\"#7a4038\" d=\"M18 9h1v1h-1z\"/><path fill=\"#1a0f1f\" d=\"M7 10h1v1h-1zM11 10h1v1h-1z\"/><path fill=\"#9c4f48\" d=\"M9 11h1v1h-1z\"/><path fill=\"#3c3742\" d=\"M15 12h2v1h-2zM19 12h3v1h-3zM16 13h4v1h-4zM21 13h1v1h-1zM16 14h1v1h-1zM19 14h2v1h-2zM17 15h4v1h-4z\"/><path fill=\"#55505e\" d=\"M17 12h2v1h-2zM20 13h1v1h-1zM17 14h2v1h-2z\"/><path fill=\"#2f2b35\" d=\"M22 13h2v1h-2zM21 14h1v1h-1zM23 14h1v1h-1zM5 15h9v1h-9zM21 15h1v1h-1zM23 15h1v1h-1zM5 16h1v1h-1zM7 16h2v1h-2zM10 16h2v1h-2zM17 16h6v1h-6zM24 16h1v1h-1zM16 17h6v1h-6zM23 17h2v1h-2zM16 18h6v1h-6zM23 18h2v1h-2zM15 19h6v1h-6zM23 19h2v1h-2zM16 20h5v1h-5zM23 20h2v1h-2zM16 21h6v1h-6zM23 21h1v1h-1zM16 22h6v1h-6zM23 22h1v1h-1zM16 23h6v1h-6zM23 23h1v1h-1zM16 24h6v1h-6zM23 24h1v1h-1z\"/><path fill=\"#231a29\" d=\"M3 14h1v1h-1zM8 14h3v1h-3zM3 15h1v1h-1zM3 16h1v1h-1zM13 16h1v1h-1zM6 17h4v1h-4zM11 17h3v1h-3zM4 19h4v1h-4zM9 19h5v1h-5zM4 20h4v1h-4zM9 20h6v1h-6zM3 21h4v1h-4zM8 21h7v1h-7zM3 22h3v1h-3zM7 22h8v1h-8zM3 23h2v1h-2zM6 23h9v1h-9zM2 24h3v1h-3zM6 24h9v1h-9zM2 25h2v1h-2zM5 25h10v1h-10zM2 26h2v1h-2zM5 26h11v1h-11z\"/><path fill=\"#4a4552\" d=\"M22 14h1v1h-1zM22 15h1v1h-1zM6 16h1v1h-1zM9 16h1v1h-1zM12 16h1v1h-1zM23 16h1v1h-1zM22 17h1v1h-1zM22 18h1v1h-1zM22 19h1v1h-1zM22 20h1v1h-1zM22 21h1v1h-1zM22 22h1v1h-1zM22 23h1v1h-1zM22 24h1v1h-1z\"/><path fill=\"#3d2c45\" d=\"M10 17h1v1h-1zM8 19h1v1h-1zM8 20h1v1h-1zM7 21h1v1h-1zM6 22h1v1h-1zM5 23h1v1h-1zM5 24h1v1h-1zM4 25h1v1h-1zM4 26h1v1h-1z\"/><path fill=\"#8a5a44\" d=\"M4 18h11v1h-11zM6 28h1v1h-1zM12 28h1v1h-1z\"/><path fill=\"#1c1820\" d=\"M20 26h2v1h-2zM20 27h2v1h-2z\"/></svg>","cora":"<svg viewBox=\"0 0 7 6\" width=\"21\" height=\"18\"><path fill=\"#1a0f1f\" d=\"M1 0h2v1h-2zM4 0h2v1h-2zM0 1h1v1h-1zM3 1h1v1h-1zM6 1h1v1h-1zM0 2h1v1h-1zM6 2h1v1h-1zM1 3h1v1h-1zM5 3h1v1h-1zM2 4h1v1h-1zM4 4h1v1h-1zM3 5h1v1h-1z\"/><path fill=\"#e05a7a\" d=\"M1 1h2v1h-2zM4 1h2v1h-2zM1 2h5v1h-5zM2 3h3v1h-3zM3 4h1v1h-1z\"/></svg>","coraV":"<svg viewBox=\"0 0 7 6\" width=\"21\" height=\"18\"><path fill=\"#1a0f1f\" d=\"M1 0h2v1h-2zM4 0h2v1h-2zM0 1h1v1h-1zM3 1h1v1h-1zM6 1h1v1h-1zM0 2h1v1h-1zM6 2h1v1h-1zM1 3h1v1h-1zM5 3h1v1h-1zM2 4h1v1h-1zM4 4h1v1h-1zM3 5h1v1h-1z\"/><path fill=\"#c99bff\" d=\"M1 1h1v1h-1z\"/><path fill=\"#a46ee8\" d=\"M2 1h1v1h-1zM4 1h2v1h-2zM1 2h5v1h-5zM2 3h3v1h-3zM3 4h1v1h-1z\"/></svg>"};
 const RESCATES = [
-  "Preparar un té caliente sin decir nada",
-  "Dar un abrazo de dos minutos",
-  "Escribir una nota de paz a mano",
-  "Masaje de cinco minutos en los hombros",
-  "Caminar diez minutos juntos sin hablar del problema"
+  { tipo:"te",      texto:"Preparar un té caliente sin decir nada" },
+  { tipo:"abrazo",  texto:"Dar un abrazo de dos minutos" },
+  { tipo:"nota",    texto:"Escribir una nota de paz a mano" },
+  { tipo:"masaje",  texto:"Masaje de cinco minutos en los hombros" },
+  { tipo:"caminar", texto:"Caminar diez minutos juntos sin hablar del problema" }
 ];
+function arteRescate(tipo){
+  if(tipo === "te") return `<span class="px te"><span class="f1">${PIXEL.te[0]}</span><span class="f2">${PIXEL.te[1]}</span></span>`;
+  if(tipo === "abrazo") return `<span class="px abrazo"><span class="cora">${PIXEL.cora}</span>${PIXEL.abrazo}</span>`;
+  if(tipo === "nota") return `<span class="px pxnota">${PIXEL.nota}</span>`;
+  if(tipo === "masaje") return `<span class="px masaje">${PIXEL.mano}<b class="brillo">✦</b></span>`;
+  if(tipo === "caminar") return `<span class="px caminar">${[0,1,2,3].map(() => `<span class="hu">${PIXEL.huella}</span>`).join("")}</span>`;
+  return `<span class="px otra">${PIXEL.pregunta}</span>`;
+}
 const nombreQuien = q => q === "ambos" ? "Los dos" : PAREJA[q].nombre;
 
 function opcionesSelect(sel, lista, otra){
@@ -2980,12 +3209,23 @@ function llenarMicroMisiones(){
   if(antes) sel.value = antes;
 }
 
+let rescateSel = null;
+function motas(n, clase){
+  return `<span class="${clase}">` + Array.from({ length:n }, (_, i) => {
+    const dur = (3 + Math.random() * 3).toFixed(1);
+    const glifo = clase === "runas-suben" ? "ᚱᚢᚾᚨᛊᛟᛉᚷ"[i % 8] : "";
+    return `<span style="left:${(12 + Math.random() * 76).toFixed(0)}%;animation-duration:${dur}s;animation-delay:-${(Math.random() * dur).toFixed(1)}s;--dx:${(Math.random() * 30 - 15).toFixed(0)}px">${glifo}</span>`;
+  }).join("") + "</span>";
+}
+
 function renderCaida(){
   const cont = $("caida-cont");
   const c = estado.caida;
   if(!c){
-    cont.innerHTML = `<div class="caida-libre">
-        <p>El reino está en pie. Si hoy alguien cae en batalla, regístrenlo para poder levantarse juntos.</p>
+    cont.innerHTML = `<div class="gracia anim">
+        <div class="escena-c">${motas(10, "motas")}${`<span class="px espada">${PIXEL.espada}</span>`}</div>
+        <h3>El reino está en pie</h3>
+        <p>Si hoy alguien cae en batalla, regístrenlo para levantarse juntos.</p>
         <button class="btn peligro" id="btn-caer">${icono("fa-skull")} Caímos en batalla</button>
         ${estado.runasPerdidas ? `<p class="perdidas">Runas perdidas para siempre: ${estado.runasPerdidas} XP</p>` : ""}
       </div>`;
@@ -2993,41 +3233,57 @@ function renderCaida(){
     return;
   }
   const lanzador = c.quien === "ambos" ? "Cualquiera de los dos" : PAREJA[otroDe(c.quien)].nombre;
-  cont.innerHTML = `
-    <div class="mancha"><b>${c.xp} XP</b><span>runas en el suelo</span></div>
-    <div class="caida-info">
-      <b>Cayó: ${nombreQuien(c.quien)}</b>
-      ${c.motivo ? `<span>“${esc(c.motivo)}”</span>` : ""}
-      <span>${cuandoFue(c.fecha)}</span>
-    </div>
-    <div class="rescate">
-      <h3>Misión de rescate</h3>
-      ${c.rescate ? `
-        <p class="mision-r">${esc(c.rescate.texto)}</p>
-        <p class="quien-l">Lanzada por ${esc(c.rescate.lanzadaPor)}</p>
-        <button class="btn" id="btn-rescatar">Rescate cumplido · recuperar ${c.xp} XP</button>
-        <button class="enlace" id="btn-cambiar-rescate">Cambiar la misión</button>
-      ` : `
-        <p class="quien-l">${lanzador} elige la misión de rescate:</p>
-        <select class="campo" id="rs-sel" aria-label="Misión de rescate"></select>
-        <input class="campo" id="rs-libre" type="text" maxlength="120" placeholder="Escribe la misión de rescate" hidden aria-label="Misión de rescate personalizada">
-        <button class="btn" id="btn-lanzar">Lanzar misión de rescate</button>
-      `}
-    </div>
-    <p class="perdidas"><button class="enlace" id="btn-caer-otra">${icono("fa-skull")} Caímos otra vez</button></p>`;
+  const opciones = [...RESCATES, ...estado.rescatesPropios.map(texto => ({ tipo:"otra", texto })), { tipo:"nueva", texto:"Inventar otra misión" }];
+  if(!c.rescate && (!rescateSel || !opciones.some(o => o.texto === rescateSel.texto))) rescateSel = opciones[0];
+  cont.innerHTML = `<div class="caida-viva">
+      <div class="escena-c">${motas(7, "runas-suben")}<span class="px mancha">${PIXEL.mancha}</span>
+        <b class="caida-xp">${c.xp} XP<small>runas en el suelo</small></b></div>
+      <p class="caida-quien"><b>Cayó: ${nombreQuien(c.quien)}</b> · ${cuandoFue(c.fecha)}</p>
+      ${c.motivo ? `<p class="caida-motivo">“${esc(c.motivo)}”</p>` : ""}
+      <div class="rescate">
+        ${c.rescate ? `
+          <div class="rescate-activo anim">
+            <div class="arte">${arteRescate(c.rescate.tipo)}</div>
+            <div>
+              <h3>Misión de rescate</h3>
+              <p class="mision-r">${esc(c.rescate.texto)}</p>
+              <p class="quien-l">Lanzada por ${esc(c.rescate.lanzadaPor)}</p>
+            </div>
+          </div>
+          <button class="btn" id="btn-rescatar">Rescate cumplido · recuperar ${c.xp} XP</button>
+          <button class="enlace" id="btn-cambiar-rescate">Cambiar la misión</button>
+        ` : `
+          <h3>Misión de rescate</h3>
+          <p class="quien-l">${lanzador} elige cómo ayudar a levantarse:</p>
+          <div class="rescates-grid" role="radiogroup" aria-label="Misión de rescate">
+            ${opciones.map((o, i) => `<button type="button" role="radio" data-i="${i}" aria-checked="${o.texto === rescateSel.texto}" class="${o.texto === rescateSel.texto ? "anim" : ""}">${arteRescate(o.tipo)}<span>${esc(o.texto)}</span></button>`).join("")}
+          </div>
+          <input class="campo" id="rs-libre" type="text" maxlength="120" placeholder="Escribe la misión de rescate" ${rescateSel.tipo === "nueva" ? "" : "hidden"} aria-label="Misión de rescate inventada">
+          <button class="btn" id="btn-lanzar">Lanzar misión de rescate</button>
+        `}
+      </div>
+      <p class="perdidas"><button class="enlace" id="btn-caer-otra">${icono("fa-skull")} Caímos otra vez</button></p>
+    </div>`;
   if(c.rescate){
     $("btn-rescatar").addEventListener("click", rescatar);
     $("btn-cambiar-rescate").addEventListener("click", () => { estado.caida.rescate = null; guardar(); renderCaida(); });
   } else {
-    const sel = $("rs-sel");
-    opcionesSelect(sel, [...RESCATES, ...estado.rescatesPropios], "Inventar otra misión de rescate");
-    sel.addEventListener("change", () => { $("rs-libre").hidden = sel.value !== "__otra"; });
+    cont.querySelectorAll(".rescates-grid button").forEach(b => b.addEventListener("click", () => {
+      rescateSel = opciones[+b.dataset.i];
+      cont.querySelectorAll(".rescates-grid button").forEach(x => {
+        const si = x === b; x.setAttribute("aria-checked", si); x.classList.toggle("anim", si);
+      });
+      $("rs-libre").hidden = rescateSel.tipo !== "nueva";
+      if(rescateSel.tipo === "nueva") $("rs-libre").focus();
+    }));
     $("btn-lanzar").addEventListener("click", () => {
-      const texto = sel.value === "__otra" ? $("rs-libre").value.trim() : sel.value;
+      const nueva = rescateSel.tipo === "nueva";
+      const texto = nueva ? $("rs-libre").value.trim() : rescateSel.texto;
       if(!texto){ toast("Escriban la misión de rescate"); $("rs-libre").focus(); return; }
-      if(sel.value === "__otra") recordar(estado.rescatesPropios, texto);
+      if(nueva) recordar(estado.rescatesPropios, texto);
       const por = c.quien === "ambos" ? (yo ? PAREJA[yo].nombre : "la pareja") : PAREJA[otroDe(c.quien)].nombre;
-      estado.caida.rescate = { texto, lanzadaPor:por, fecha:Date.now() };
+      estado.caida.rescate = { texto, tipo: nueva ? "otra" : rescateSel.tipo, lanzadaPor:por, fecha:Date.now() };
+      rescateSel = null;
       guardar(); renderCaida();
       toast("Misión de rescate lanzada");
     });
@@ -3167,7 +3423,7 @@ function renderAltar(){
   }
   const rec = $("runas-recibidas"); rec.innerHTML = "";
   if(!estado.altar.recibidas.length){
-    rec.innerHTML = `<p class="vacio">Todavía no llegaron runas. Cuando ${yo ? PAREJA[otroDe(yo)].nombre : "tu pareja"} te envíe una por WhatsApp, toca el enlace y aparecerá acá.</p>`;
+    rec.innerHTML = `<p class="vacio">Todavía no llegaron runas.</p>`;
   }
   estado.altar.recibidas.forEach(r => {
     const b = document.createElement("button");
@@ -3221,13 +3477,13 @@ function inscribirRuna(){
   $("al-texto").value = "";
   const panel = $("enviar-runa");
   panel.hidden = false;
-  panel.innerHTML = `<p><b>Runa inscrita.</b> Ahora envíasela a ${PAREJA[runa.para].nombre}: al tocar el enlace, la runa aparecerá sellada en su Altar.</p>
+  panel.innerHTML = `<p><b>Runa inscrita.</b> Envíasela a ${PAREJA[runa.para].nombre}:</p>
     <div class="acciones izq">
       <a class="btn wa" target="_blank" rel="noopener" id="er-wa">${icono("fa-whatsapp")} Enviar runa por WhatsApp</a>
       <button class="btn sec" id="er-copiar">${icono("fa-copy")} Copiar enlace</button>
       <button class="btn sec" id="er-ver">${icono("fa-eye")} Vista previa</button>
     </div>
-    ${sitioPublicado() ? "" : '<p class="nota-url">Ojo: el enlace funcionará cuando el sitio esté publicado en GitHub Pages. Desde este archivo local todavía no se puede abrir en otro celular.</p>'}`;
+    ${sitioPublicado() ? "" : '<p class="nota-url">El enlace funcionará cuando el sitio esté publicado en GitHub Pages.</p>'}`;
   $("er-wa").href = urlWhatsApp(mensajeRuna(runa));
   $("er-copiar").addEventListener("click", () => copiar(enlaceSantuario("runa", runa)));
   $("er-ver").addEventListener("click", () => abrirRuna(runa, true));
@@ -3537,6 +3793,25 @@ function iniciarGuardian(){
   });
 }
 
+// ===== Corazones del Altar =====
+let lluviaAltar = null;
+function corazon(){
+  const s = document.createElement("span");
+  const tam = 14 + Math.random() * 18, dur = 6 + Math.random() * 5;
+  s.className = "corazon-flota";
+  s.style.cssText = `left:${Math.random() * 96}vw;width:${tam}px;animation-duration:${dur}s;--dx:${(Math.random() * 80 - 40).toFixed(0)}px;--rot:${(Math.random() * 40 - 20).toFixed(0)}deg`;
+  s.innerHTML = PIXEL.coraV;
+  document.body.appendChild(s);
+  setTimeout(() => s.remove(), dur * 1000 + 200);
+}
+function iniciarCorazones(){
+  if(sinMovimiento) return;
+  pararCorazones();
+  for(let i = 0; i < 18; i++) setTimeout(corazon, i * 120);
+  lluviaAltar = setInterval(corazon, 1100);
+}
+function pararCorazones(){ clearInterval(lluviaAltar); lluviaAltar = null; }
+
 // ===== Menú y páginas =====
 function cambiarHash(p, reemplazar){
   try{ reemplazar ? history.replaceState(null, "", "#" + p) : history.pushState(null, "", "#" + p); }
@@ -3552,6 +3827,7 @@ function irA(p, desplazar = true){
   });
   if(location.hash !== "#" + p) cambiarHash(p, true);
   if(p === "guardian") verEvolucion();
+  if(p === "altar") iniciarCorazones(); else pararCorazones();
   if(!desplazar) return;
   const alto = $("menu").offsetHeight;
   const ini = document.querySelector(".paginas").getBoundingClientRect().top;
